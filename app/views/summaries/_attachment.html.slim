@@ -1,0 +1,21 @@
+.slack-message-attachment class="slack-message-attachment-#{attachment_item[:service_name] || 'other'}"
+  - case attachment_item[:service_name]
+  - when nil
+    .slack-message-attachment-name
+      a href=attachment_item[:title_link]
+        = attachment_item[:title]
+    .slack-message-attachment-text
+      = attachment_text_format(attachment_item[:text])
+  - when 'togelack-image'
+    img src=image_proxy_path(url: attachment_item[:image_url]) alt=''
+  - when 'twitter'
+    .slack-message-attachment-name
+      = attachment_item[:author_name]
+      | &nbsp;
+      span.uk-text-small.uk-text-muted
+        = attachment_item[:author_subname]
+    .slack-message-attachment-text
+      = attachment_text_format(attachment_item[:text])
+  - else
+    .slack-message-attachment-text
+      = attachment_item[:text]

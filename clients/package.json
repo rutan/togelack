@@ -1,0 +1,18 @@
+{
+  "name": "togelack",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "watch": "webpack -w"
+  },
+  "author": "ru_shalm",
+  "license": "",
+  "devDependencies": {
+    "babel-core": "^5.2.16",
+    "babel-loader": "^5.0.0",
+    "jquery": "^2.1.4",
+    "vue": "^0.11.9",
+    "vue-dnd": "^0.1.1",
+    "webpack": "^1.8.11"
+  }
+}

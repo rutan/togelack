@@ -1,0 +1,73 @@
+#js-edit-app.uk-container.uk-container-center.uk-margin-top data-summary-id=(summary.new_record? ? nil : summary.id) data-messages=messages_json(summary)
+  .uk-grid
+    .uk-width-1-2
+      .uk-panel.uk-panel-box style='height: 500px;'
+        .uk-panel-title style='line-height: 30px;'
+          | プレビュー（{{ messages.length }} / 100）
+        ul.uk-list.editor-main-list style="height: 450px; overflow-y: scroll;"
+          template v-repeat='messages'
+            li.slack-message-splitter v-dropzone='dropMessage: insertMessage(messages, loadMessages, $index, $droptag, $dropdata)'
+            li.slack-message.drag-message v-draggable='dropMessage: {index: $index, type: "message"}' v-dropzone='dropMessage: sortMessage(messages, loadMessages, $index, $droptag, $dropdata)'
+              .slack-message-avatar
+                img v-attr='src: avatar_url'
+              .slack-message-header
+                .slack-message-header-name
+                  | {{username}}
+                a.slack-message-header-date target='_blank' v-attr='href: permalink'
+                  | {{created_time}}
+                .slack-message-header-channel
+                  | in \#{{channel}}
+
+              .slack-message-body
+                | {{{format_text}}}
+
+          li.uk-comment.drag-message v-dropzone='dropMessage: addMessage(messages, loadMessages, $droptag, $dropdata)' style='height: 48px; border: 2px dashed #ccc; margin: 10px;'
+            .uk-text-muted.uk-text-center style='line-height: 48px;'
+              | 右パネルからメッセージをドラッグ&ドロップ
+
+    .uk-width-1-2
+      .uk-panel.uk-panel-box style='height: 500px;' v-dropzone='dropMessage: dropMessage(messages, $droptag, $dropdata)'
+        form.uk-form.uk-grid action='#' v-on='submit: onPermalink($event, permalink, loadMessages)'
+          .uk-width-4-5
+            input.uk-width-1-1 type='text' name='permalink' placeholder='https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/.../....' v-model='permalink' v-attr='readonly: nowLoading'
+          .uk-width-1-5
+            button.uk-button.uk-width-1-1 type='submit' v-attr='disabled: nowLoading'
+              i.fa.fa-eyedropper v-if='!nowLoading'
+              i.fa.fa-spinner.fa-spin v-if='nowLoading'
+
+        p.uk-text-large.uk-text-muted style="{{loadMessages.length > 0 ? 'display: none;' : ''}}"
+          | 発言のパーマリンクを入力してください
+
+        ul.uk-list style="height: 450px; overflow-y: scroll; {{loadMessages.length == 0 ? 'display: none;' : ''}}"
+          li.slack-message.drag-message v-repeat='loadMessages' v-draggable='dropMessage: {index: $index, type: "loadMessage"}'
+            .slack-message-avatar
+              img v-attr='src: avatar_url'
+            .slack-message-header
+              .slack-message-header-name
+                | {{username}}
+              a.slack-message-header-date target='_blank' v-attr='href: permalink'
+                | {{created_time}}
+              .slack-message-header-channel
+                | in \#{{channel}}
+            .slack-message-body
+              | {{{format_text}}}
+
+  br
+
+  .uk-margin-top.uk-width-2-3.uk-container-center
+    .uk-form.uk-panel.uk-panel-box
+      input.js-edit-app-title.uk-width-1-1.uk-form-large name='title' type='text' value=summary.title placeholder='まとめのタイトル' v-model='title' v-attr='readonly: nowSubmitting'
+      textarea.js-edit-app-description.uk-width-1-1.uk-margin-top style='height: 5em;' name='description' placeholder='まとめの説明文(省略可)' v-model='description' v-attr='readonly: nowSubmitting'
+        = summary.description
+
+  br
+
+  .uk-text-center.uk-margin-top
+    button.uk-button.uk-button-large.uk-button-primary v-on='click: onSubmit($event, title, description, messages)' v-attr='disabled: nowSubmitting'
+      | まとめを投稿する
+
+- content_for :javascript do
+  javascript:
+    (function() {
+      var editApp = createEditApp('#js-edit-app')
+    })();

@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    title
+      - if content_for?(:title)
+        == yield(:title)
+        | &nbsp;-&nbsp;Togelack
+      - else
+        | Togelack
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+  body
+    nav.uk-navbar
+      .uk-container.uk-container-center
+        a.uk-navbar-brand href='/'
+          | Togelack - Slackまとめサイト
+
+        .uk-navbar-flip
+          ul.uk-navbar-nav
+            - if @current_user
+              li
+                a href=new_summary_path
+                  | まとめの作成
+              li
+                a href=session_path data-method='delete'
+                  | ログアウト
+            - else
+              li
+                a href='/auth/slack'
+                  | ログイン
+
+    = yield
+
+    hr
+    .uk-margin-top.uk-margin-bottom.uk-text-center.uk-text-muted
+      | Togelack @ru_shalm
+
+    - if @global_alert.present?
+      .global-alert
+        = @global_alert
+
+    = javascript_include_tag 'application'
+    = yield(:javascript)

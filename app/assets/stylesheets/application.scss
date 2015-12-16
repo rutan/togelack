@@ -1,0 +1,398 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require uikit.ruikit
+ *= require_tree .
+ *= require_self
+ */
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// body
+body {
+  background: #01579B;
+  padding-bottom: 20px;
+}
+
+a, .uk-link {
+  &:link, &:visited {
+    color: #64B5F6;
+  }
+
+  &:hover {
+    color: #BBDEFB;
+  }
+}
+
+a.uk-navbar-brand {
+  color: #fff;
+}
+
+.uk-navbar {
+  background: #0288D1;
+  color: #fff;
+
+  .uk-navbar-nav > li > a {
+    background: #0288D1;
+
+    &:hover {
+      background: #0277BD;
+    }
+  }
+}
+
+.uk-panel-box {
+  background: rgba(0, 0, 0, .25);
+  color: #fff;
+
+  .uk-panel-title {
+    color: #fff;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.uk-button-primary {
+  background: #03A9F4;
+}
+
+.uk-form {
+  input[type='text'],
+  textarea {
+    &[readonly] {
+      background: #666;
+    }
+  }
+}
+
+.uk-pagination > li > a {
+  background: #0277BD;
+  color: #fff;
+}
+
+.uk-pagination > .uk-active > span {
+  background: #03A9F4;
+  color: #fff;
+}
+
+.uk-pagination > .uk-disabled > span {
+  background: #01579B;
+  color: #fff;
+}
+
+.uk-nav > li > a {
+  color: #fff;
+  &:hover {
+    color: #B3E5FC;
+  }
+}
+
+.uk-subnav > li > a {
+  color: #fff;
+  &:hover {
+    color: #B3E5FC;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+.summary-title {
+  position: relative;
+  padding-right: 150px;
+}
+
+.summary-owner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  text-align: right;
+  color: #999;
+  font-size: 14px;
+
+  a {
+    color: #999;
+
+    &:hover {
+      color: #ccc;
+    }
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 100%;
+    margin: 0 5px;
+  }
+}
+
+.summary-description {
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.summary-list-item {
+}
+
+.summary-list-item-header {
+  overflow: hidden;
+}
+
+.summary-list-item-avatar {
+  float: left;
+  display: block;
+  width: 40px;
+  height: 40px;
+
+  img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 2px;
+  }
+}
+
+.summary-list-item-title,
+.summary-list-item-owner,
+.summary-list-item-description {
+  margin-left: 52px;
+}
+
+.summary-list-item-title {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  a {
+    color: #fff;
+  }
+}
+
+.summary-list-item-owner {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #999;
+  a {
+    color: #999;
+  }
+}
+
+.summary-list-item-description {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #999;
+}
+
+.summary-list-item-split {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: rgba(255, 255, 255, .3);
+}
+
+
+.slack-message {
+  margin-top: 15px;
+  font-size: 14px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  .slack-message-avatar {
+    display: block;
+    float: left;
+    width: 36px;
+    height: 36px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      background: #fff;
+      border-radius: 2px;
+    }
+  }
+
+  .slack-message-header,
+  .slack-message-body,
+  .slack-message-attachment {
+    margin-left: 46px;
+  }
+
+  .slack-message-header {
+    overflow: hidden;
+
+    & > * {
+      display: block;
+      float: left;
+      margin-right: .75em;
+    }
+
+    .slack-message-header-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: #4FC3F7;
+    }
+
+    .slack-message-header-channel,
+    .slack-message-header-date {
+      font-size: 12px;
+      padding-top: 3px;
+      color: #999;
+    }
+  }
+
+  .slack-message-body {
+    margin-top: 5px;
+    line-height: 1.4;
+    word-wrap: break-word;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    i {
+      color: #999;
+    }
+
+    pre {
+      background: rgba(0, 0, 0, .3);
+      color: #fff;
+    }
+
+    code {
+      color: #FFF176;
+      white-space: pre;
+    }
+
+    pre code {
+      white-space: pre-wrap;
+    }
+
+    q, blockquote {
+      font-style: normal;
+    }
+
+    blockquote {
+      font-size: 100%;
+    }
+
+    img.emoji {
+      width: 20px;
+      height: 20px;
+      overflow: hidden;
+    }
+
+    &.me {
+      opacity: .5;
+    }
+  }
+
+  .slack-message-attachment {
+    margin-top: 5px;
+    padding: 10px;
+    background: rgba(0, 0, 0, .3);
+    line-height: 1.5;
+  }
+}
+
+.slack-message-splitter {
+  position: relative;
+  height: 15px;
+
+  &.dropMessage {
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: #9c6;
+      opacity: .5;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+.drag-message {
+  position: relative;
+  min-height: 48px;
+
+  .dropMessage {
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: #9c6;
+      opacity: .5;
+    }
+  }
+
+  &.undefined {
+    opacity: .5;
+  }
+}
+
+.editor-main-list {
+  .drag-message {
+    margin-top: 0;
+  }
+}
+
+.global-alert {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-size: 14px;
+  background: rgba(255, 0, 0, .5);
+  color: #fff;
+}
+
+.profiler-results {
+  opacity: .1;
+  &:hover {
+    opacity: 1;
+  }
+}
+

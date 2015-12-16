@@ -1,0 +1,61 @@
+.summary-list-item.uk-panel.uk-panel-box.uk-margin-top
+  .summary-list-item-header
+    - if summary.user
+      a.summary-list-item-avatar href=user_path(summary.user)
+        img src=summary.user.avatar_url title=summary.user.name
+    h3.summary-list-item-title
+      a href=summary_path(summary)
+        = (summary.title && summary.title.size > 0 ? summary.title : 'no title')
+    .summary-list-item-owner
+      - if summary.user
+        | by&nbsp;
+        a href=user_path(summary.user)
+          | #{summary.user.name}
+      - else
+        | -
+
+  hr.summary-list-item-split
+
+  - if summary.description.to_s.size > 0
+    .uk-panel.uk-panel-box.uk-panel-box-secondary.summary-description
+      = summary.description_html
+
+  ul.uk-list
+    - summary.messages.each do |message|
+      li.slack-message
+        a.slack-message-avatar href=message.permalink target='_blank'
+          img src=message.avatar_url
+        .slack-message-header
+          .slack-message-header-name
+            | #{message.username}
+          a.slack-message-header-date href=message.permalink target='_blank'
+            = l(message.created_at)
+          .slack-message-header-channel
+            | in ##{message.channel}
+        .slack-message-body class=('me' if message.me?)
+          == message.format_text
+        - if message.image
+          .slack-message-attachment class="slack-message-attachment-image"
+            a href=message.permalink
+              img src=message.image['thumb_360'] alt=message.image['title']
+        - message.attachment_items.each do |attachment_item|
+          = render('/summaries/attachment', attachment_item: attachment_item)
+
+    - if @current_user && (@current_user == summary.user || @current_user.admin?)
+      ul.uk-subnav.uk-text-right.uk-margin-top
+        - if @current_user && @current_user == summary.user
+          li
+            a href=edit_summary_path(summary)
+              i.fa.fa-pencil
+              | &nbsp;編集
+          li
+            a href=summary_path(summary) data-method='delete' data-confirm='本当に削除してもよろしいですか？'
+              i.fa.fa-remove
+              | &nbsp;削除
+        - elsif @current_user && @current_user.admin?
+          li
+            a href=summary_path(summary) data-method='delete' data-confirm='管理者特権で削除してもよろしいですか？'
+              i.fa.fa-remove
+              | &nbsp;管理者削除
+
+br

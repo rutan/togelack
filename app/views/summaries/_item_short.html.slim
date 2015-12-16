@@ -1,0 +1,10 @@
+.summary-list-item.uk-panel.uk-panel-box.uk-margin-top
+  .summary-list-item-header
+    - if summary.user
+      a.summary-list-item-avatar href=user_path(summary.user)
+        img src=summary.user.avatar_url title=summary.user.name
+    h3.summary-list-item-title
+      a href=summary_path(summary)
+        = (summary.title && summary.title.size > 0 ? summary.title : 'no title')
+    .summary-list-item-description
+      = summary.description
