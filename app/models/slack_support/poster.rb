@@ -14,8 +14,8 @@ module SlackSupport
                                    text: "<@#{user.uid}> が『<#{url}|#{ERB::Util.html_escape title}>』についてまとめました。\n<#{ERB::Util.html_escape url}>",
                                    parse: 'none',
                                    unfurl_links: true,
-                                   icon_url: icon.match(/\Ahttp/) ? @icon : nil,
-                                   icon_emoji: icon.match(/\A:.+:\z/) ? @icon : nil,
+                                   icon_url: icon.match(/\Ahttp/) ? icon : nil,
+                                   icon_emoji: icon.match(/\A:.+:\z/) ? icon : nil,
                                    attachments: [
                                        {
                                            fallback: title,
@@ -37,7 +37,7 @@ module SlackSupport
     end
 
     def icon
-      (ENV['SLACK_ICON'] || ':slack:')
+      (ENV['SLACK_ICON'] || ':slack:').to_s
     end
   end
 end
