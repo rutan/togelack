@@ -4,12 +4,11 @@
       - if @summaries.present?
         - @summaries.each do |summary|
           = render 'item', summary: summary
+        == paginate(@summaries)
       - else
         .summary-list-item.uk-panel.uk-panel-box.uk-margin-top
           p.uk-text-center.uk-text-large
             | まだ、まとめはありません
-
-      == paginate(@summaries)
 
     .uk-width-1-3
       = render 'sidebar'

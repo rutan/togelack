@@ -6,7 +6,7 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'puma'
 gem 'eventmachine'
 
-gem 'mongoid', '~> 4.0.0'
+gem 'mongoid', '~> 5.0.0'
 gem 'bson_ext'
 gem 'redis-rails'
 

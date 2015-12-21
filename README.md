@@ -1,5 +1,7 @@
 # Togelack
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 Slack Summary Service (like togetter).
 
 ## env
