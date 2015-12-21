@@ -4,8 +4,15 @@
 
 Slack Summary Service (like togetter).
 
+## How to deploy
+- [SlackのTogetter風アプリ「Togelack」をHerokuにデプロイする - Qiita](http://qiita.com/ru_shalm/items/35100b527877cfe09b5e)
+
 ## env
 ### requirement
+- RAILS_ENV
+    - `"production"`
+- MONGOID_ENV
+    - `"production"`
 - SLACK_TOKEN
     - ex. xoxp-1234567-12345-...
 - SLACK_CLIENT_ID
@@ -22,6 +29,8 @@ Slack Summary Service (like togetter).
 ### optional
 - SLACK_CHANNEL
     - notify slack channel (ex. general)
+- SLACK_ICON
+    - notify slack icon (ex. :smile: or http://〜)
 - REDIS_URL
     - use redis cache (ex. redis://localhost)
 
