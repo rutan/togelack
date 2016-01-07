@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :require_login_in_private
+
   # GET /auth/slack/callback
   def create
     auth = request.env['omniauth.auth']
