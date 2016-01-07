@@ -45,6 +45,11 @@
             "description": "Redis URL(if you want to use for cache)",
             "value": "",
             "required": false
+        },
+        "PRIVATE_MODE": {
+            "description": "Require login to view contents(set 'true' to enabled)",
+            "value": "",
+            "required": false
         }
     },
     "scripts": {
