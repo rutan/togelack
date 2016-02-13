@@ -33,6 +33,8 @@ Slack Summary Service (like togetter).
     - notify slack icon (ex. :smile: or http://〜)
 - REDIS_URL
     - use redis cache (ex. redis://localhost)
+- PRIVATE_MODE
+    - need slack login (ex. true or false)
 
 ## LICENSE
 MIT
