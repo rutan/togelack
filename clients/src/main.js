@@ -1,7 +1,7 @@
 // encoding: utf-8
 
-let Vue = require('vue')
-Vue.use(require('vue-dnd'))
+let Vue = require('vue');
+Vue.use(require('vue-dnd'));
 
 class EditApp extends Vue {
     constructor(element) {
@@ -17,11 +17,12 @@ class EditApp extends Vue {
                 nowLoading: false,
                 nowSubmitting: false
             },
-            ready: () => {
-                this.summaryID = $(this.$el).data('summary-id')
-                this.title = $(this.$el).find('.js-edit-app-title').val()
-                this.description = $(this.$el).find('.js-edit-app-description').val()
-                this.messages = $(this.$el).data('messages')
+            ready() {
+                const assignElement = $(this.$el).find('.js-assign-data');
+                this.summaryID = assignElement.data('summary-id');
+                this.title = assignElement.data('title');
+                this.description = assignElement.data('description');
+                this.messages = assignElement.data('messages');
             },
             methods: {
                 sortMessage: (messages, loadMessages, index, droptag, dropdata) => {
@@ -38,9 +39,10 @@ class EditApp extends Vue {
                     }
                 },
                 insertMessage: (messages, loadMessages, index, droptag, dropdata) => {
+                    let t;
                     switch (dropdata.type) {
                         case 'message':
-                            let t = messages[dropdata.index];
+                            t = messages[dropdata.index]
                             if (dropdata.index < index) {
                                 messages.splice(dropdata.index, 1)
                                 messages.splice(index - 1, 0, t)
@@ -48,16 +50,16 @@ class EditApp extends Vue {
                                 messages.splice(dropdata.index, 1)
                                 messages.splice(index, 0, t)
                             }
-                            break
+                            break;
                         case 'loadMessage':
                             if (messages.length >= 100) {
                                 alert('これ以上追加できません')
                                 return
                             }
-                            let t = loadMessages[dropdata.index];
+                            t = loadMessages[dropdata.index]
                             loadMessages.splice(dropdata.index, 1)
                             messages.splice(index, 0, t)
-                            break
+                            break;
                     }
                 },
                 addMessage: (messages, loadMessages, droptag, dropdata) => {

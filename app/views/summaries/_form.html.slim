@@ -1,4 +1,5 @@
-#js-edit-app.uk-container.uk-container-center.uk-margin-top data-summary-id=(summary.new_record? ? nil : summary.id) data-messages=messages_json(summary)
+#js-edit-app.uk-container.uk-container-center.uk-margin-top
+  input.js-assign-data type='hidden' v-pre=true data-summary-id=(summary.new_record? ? nil : summary.id) data-title=summary.title data-description=summary.description data-messages=messages_json(summary)
   .uk-grid
     .uk-width-1-2
       .uk-panel.uk-panel-box style='height: 500px;'
@@ -56,9 +57,8 @@
 
   .uk-margin-top.uk-width-2-3.uk-container-center
     .uk-form.uk-panel.uk-panel-box
-      input.js-edit-app-title.uk-width-1-1.uk-form-large name='title' type='text' value=summary.title placeholder='まとめのタイトル' v-model='title' v-attr='readonly: nowSubmitting'
+      input.js-edit-app-title.uk-width-1-1.uk-form-large name='title' type='text' placeholder='まとめのタイトル' v-model='title' v-attr='readonly: nowSubmitting'
       textarea.js-edit-app-description.uk-width-1-1.uk-margin-top style='height: 5em;' name='description' placeholder='まとめの説明文(省略可)' v-model='description' v-attr='readonly: nowSubmitting'
-        = summary.description
 
   br
 
@@ -68,6 +68,6 @@
 
 - content_for :javascript do
   javascript:
-    (function() {
+    (function () {
       var editApp = createEditApp('#js-edit-app')
     })();
