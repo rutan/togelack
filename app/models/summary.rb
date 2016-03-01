@@ -22,4 +22,12 @@ class Summary
       ms.select { |n| n.id == id }.first
     end
   end
+
+  def self.match_text (text)
+    message_ids = Message.any_of({ :text => /.*#{text}.*/ }).only(:_id).map do |v|
+      {message_ids: v}
+    end
+
+    any_of({ :title => /.*#{text}.*/ }, message_ids)
+  end
 end
