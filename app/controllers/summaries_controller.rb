@@ -13,6 +13,7 @@ class SummariesController < ApplicationController
   def list
     page = (params[:page] || 1).to_i
     source = Summary.newest.page(page).per(25)
+    source = source.match_text(params[:keyword]) if params[:keyword]
     @summaries = SummaryDecorator.decorate_collection(source)
   end
 
