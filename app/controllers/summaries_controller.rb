@@ -7,7 +7,6 @@ class SummariesController < ApplicationController
   def index
     page = (params[:page] || 1).to_i
     source = Summary.newest.page(page)
-
     @summaries = SummaryDecorator.decorate_collection(source)
   end
 
