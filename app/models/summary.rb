@@ -10,11 +10,13 @@ class Summary
   scope :newest, -> { order(id: :desc) }
 
   validates :title,
-            length: 0..64
+            length: 1..64
   validates :description,
             length: 0..1048
   validates :messages,
             length: 1..100
+
+  after_initialize :set_default_params
 
   def sorted_messages
     ms = self.messages.to_a
@@ -29,5 +31,12 @@ class Summary
     end
 
     any_of({ :title => /.*#{text}.*/ }, message_ids)
+  end
+
+  private
+
+  def set_default_params
+    self.title ||= ''
+    self.description ||= ''
   end
 end
