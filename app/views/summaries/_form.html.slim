@@ -4,7 +4,7 @@
     .uk-width-1-2
       .uk-panel.uk-panel-box style='height: 500px;'
         .uk-panel-title style='line-height: 30px;'
-          | プレビュー（{{ messages.length }} / 100）
+          | プレビュー（{{ messages.length }} / 1000）
         ul.uk-list.editor-main-list style="height: 450px; overflow-y: scroll;"
           template v-repeat='messages'
             li.slack-message-splitter v-dropzone='dropMessage: insertMessage(messages, loadMessages, $index, $droptag, $dropdata)'

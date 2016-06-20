@@ -14,7 +14,7 @@ class Summary
   validates :description,
             length: 0..1048
   validates :messages,
-            length: 1..100
+            length: 1..1000
 
   after_initialize :set_default_params
 
