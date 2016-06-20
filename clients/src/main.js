@@ -52,7 +52,7 @@ class EditApp extends Vue {
                             }
                             break;
                         case 'loadMessage':
-                            if (messages.length >= 100) {
+                            if (messages.length >= 1000) {
                                 alert('これ以上追加できません')
                                 return
                             }
@@ -70,7 +70,7 @@ class EditApp extends Vue {
                             messages.splice(dropdata.index, 1)
                             break
                         case 'loadMessage':
-                            if (messages.length >= 100) {
+                            if (messages.length >= 1000) {
                                 alert('これ以上追加できません')
                                 return
                             }
