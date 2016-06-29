@@ -23,6 +23,11 @@ body {
   padding-bottom: 20px;
 }
 
+input::selection,
+textarea::selection {
+  color: #444;
+}
+
 a, .uk-link {
   &:link, &:visited {
     color: #64B5F6;
