@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "NODE_ENV=production webpack --bail --optimize-minimize",
     "watch": "webpack -w"
   },
   "author": "ru_shalm",
