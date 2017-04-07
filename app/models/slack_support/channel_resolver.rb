@@ -1,12 +1,21 @@
 module SlackSupport
-  # チャンネル名からIDを逆引き
   class ChannelResolver
     def initialize(client)
       @client = client
     end
 
-    def resolve(name)
-      channels[name] || groups[name] || name
+    def resolve_by_id(id)
+      channel =
+        channels.find { |c| c['id'] == id } ||
+        groups.find { |c| c['id'] == id }
+      channel ? channel['name'] : id
+    end
+
+    def resolve_by_name(name)
+      channel =
+        channels.find { |c| c['name'] == name } ||
+          groups.find { |c| c['name'] == name }
+      channel ? channel['id'] : name
     end
 
     private
@@ -15,8 +24,7 @@ module SlackSupport
       unless @channels
         response = @client.channels_list
         raise 'missing connect to slack' unless response['ok']
-        array = response['channels'].map { |n| [n['name'], n['id']] }
-        @channels = Hash[array]
+        @channels = response['channels']
       end
       @channels
     end
@@ -25,8 +33,7 @@ module SlackSupport
       unless @groups
         response = @client.groups_list
         raise 'missing connect to slack' unless response['ok']
-        array = response['groups'].map {|n| [n['name'], n['id']]}
-        @groups = Hash[array]
+        @groups = response['groups']
       end
       @groups
     end

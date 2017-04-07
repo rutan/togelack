@@ -488,5 +488,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   webmock
 
+RUBY VERSION
+   ruby 2.2.4p230
+
 BUNDLED WITH
-   1.11.2
+   1.14.6

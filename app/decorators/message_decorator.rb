@@ -1,10 +1,14 @@
 class MessageDecorator < Draper::Decorator
   delegate_all
   include DecorateSerializer
-  attr :id, :username, :channel, :text, :format_text, :avatar_url, :me?, :created_at, :created_time, :permalink
+  attr :id, :username, :channel, :channel_name, :text, :format_text, :avatar_url, :me?, :created_at, :created_time, :permalink
 
   def id
     object._id.to_s
+  end
+
+  def channel_name
+    object.channel_name || object.channel
   end
 
   def created_time

@@ -7,7 +7,20 @@ module Services
 
     def cache(url)
       archive_url = SlackSupport::ArchiveURL.new(url)
-      c_id = SlackSupport::ChannelResolver.new(@client).resolve(archive_url.channel)
+      resolver = SlackSupport::ChannelResolver.new(@client)
+      c_id, c_name =
+        if archive_url.channel.match(/[A-Z]/)
+          [
+            archive_url.channel,
+            resolver.resolve_by_id(archive_url.channel)
+          ]
+        else
+          [
+            resolver.resolve_by_name(archive_url.channel),
+            archive_url.channel
+          ]
+        end
+
       raise 'not found channels' unless c_id
       params = {
           channel: c_id,
@@ -33,7 +46,11 @@ module Services
         end
 
         # message
-        message = Message.find_or_initialize_by(channel: archive_url.channel, ts: raw['ts'])
+        message = Message.find_or_initialize_by(
+          channel: archive_url.channel,
+          ts: raw['ts']
+        )
+        message['channel_name'] = c_name
         raw.each { |k, v| message[k] = v }
         message.save
         message

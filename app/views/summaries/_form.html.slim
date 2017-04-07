@@ -17,7 +17,7 @@
                 a.slack-message-header-date target='_blank' v-attr='href: permalink'
                   | {{created_time}}
                 .slack-message-header-channel
-                  | in \#{{channel}}
+                  | in \#{{channel_name}}
 
               .slack-message-body
                 | {{{format_text}}}
@@ -49,7 +49,7 @@
               a.slack-message-header-date target='_blank' v-attr='href: permalink'
                 | {{created_time}}
               .slack-message-header-channel
-                | in \#{{channel}}
+                | in \#{{channel_name}}
             .slack-message-body
               | {{{format_text}}}
 

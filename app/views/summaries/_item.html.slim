@@ -31,7 +31,7 @@
           a.slack-message-header-date href=message.permalink target='_blank'
             = l(message.created_at)
           .slack-message-header-channel
-            | in ##{message.channel}
+            | in ##{message.channel_name}
         .slack-message-body class=('me' if message.me?)
           == message.format_text
         - if message.image

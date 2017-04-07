@@ -3,6 +3,7 @@ class Message
   include Mongoid::Attributes::Dynamic
 
   field :channel, type: String
+  field :channel_name, type: String
   field :ts, type: String
   index({channel: 1, ts: 1}, {unique: true})
 
