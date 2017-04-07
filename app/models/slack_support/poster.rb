@@ -33,7 +33,7 @@ module SlackSupport
     private
 
     def channel_id
-      @channel_id ||= ChannelResolver.new(@client).resolve(@channel_name)
+      @channel_id ||= ChannelResolver.new(@client).resolve_by_name(@channel_name)
     end
 
     def icon
