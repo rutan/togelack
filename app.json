@@ -1,7 +1,7 @@
 {
     "name": "Togelack",
     "description": "Summary of Slack talks.",
-    "repository": "https://github.com/rutan/togelack",
+    "repository": "https://github.com/vividmuimui/togelack",
     "keywords": ["slack", "summary"],
     "addons": ["mongolab:sandbox"],
     "env": {
@@ -38,7 +38,7 @@
         },
         "SLACK_ICON": {
             "description": "notify icon (ex. :smile: / http://〜)",
-            "value": "https://raw.githubusercontent.com/rutan/togelack/master/togelack.png",
+            "value": "https://raw.githubusercontent.com/vividmuimui/togelack/master/togelack.png",
             "required": false
         },
         "REDIS_URL": {
