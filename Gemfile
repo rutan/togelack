@@ -7,6 +7,7 @@ gem 'puma'
 gem 'eventmachine'
 
 gem 'mongoid', '~> 5.0.0'
+gem 'kaminari-mongoid'
 gem 'bson_ext'
 gem 'redis-rails'
 
