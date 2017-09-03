@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.4.1'
 
-gem 'rails', '4.2.0'
+gem 'rails', '~> 4.2'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'puma'
 gem 'eventmachine'
 
 gem 'mongoid', '~> 5.0.0'
+gem 'kaminari-mongoid'
 gem 'bson_ext'
 gem 'redis-rails'
 
