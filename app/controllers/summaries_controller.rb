@@ -43,6 +43,7 @@ class SummariesController < ApplicationController
   end
 
   def update
+    raise 'permission error' unless @summary.user == @current_user
     if @summary.update(summary_params)
       render json: {result: @summary.decorate}, root: nil
     else
