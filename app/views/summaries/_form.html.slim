@@ -25,8 +25,7 @@
               ul.uk-subnav.uk-text-right.uk-margin-top
                 li
                   a v-on='click: dropMessage(messages, $droptag, {index: $index, type: "message"})'
-                    i.fa.fa-remove
-                    | &nbsp;削除
+                    i.fa.fa-remove>削除
 
           li.uk-comment.drag-message v-dropzone='dropMessage: addMessage(messages, loadMessages, $droptag, $dropdata)' style='height: 48px; border: 2px dashed #ccc; margin: 10px;'
             .uk-text-muted.uk-text-center style='line-height: 48px;'
@@ -62,8 +61,7 @@
             ul.uk-subnav.uk-text-right.uk-margin-top
               li
                 a v-on='click: addMessage(messages, loadMessages, $droptag, {index: $index, type: "loadMessage"})'
-                  i.fa.fa-plus
-                  | &nbsp;追加
+                  i.fa.fa-plus>追加
 
   br
 
