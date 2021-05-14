@@ -28,7 +28,7 @@
               ul.uk-subnav.uk-text-right.uk-margin-top
                 li
                   a v-on='click: dropMessage(messages, $droptag, {index: $index, type: "message"})'
-                    i.fa.fa-remove>
+                    i.fa.fa-trash>
                     | 削除
 
           li.uk-comment.drag-message v-dropzone='dropMessage: addMessage(messages, loadMessages, $droptag, $dropdata)' style='height: 48px; border: 2px dashed #ccc; margin: 10px;'

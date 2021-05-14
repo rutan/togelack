@@ -46,16 +46,16 @@
         - if @current_user && @current_user == summary.user
           li
             a href=edit_summary_path(summary)
-              i.fa.fa-pencil
+              i.fa.fa-edit
               | &nbsp;編集
           li
             a href=summary_path(summary) data-method='delete' data-confirm='本当に削除してもよろしいですか？'
-              i.fa.fa-remove
+              i.fa.fa-trash
               | &nbsp;削除
         - elsif @current_user && @current_user.admin?
           li
             a href=summary_path(summary) data-method='delete' data-confirm='管理者特権で削除してもよろしいですか？'
-              i.fa.fa-remove
+              i.fa.fa-trash
               | &nbsp;管理者削除
 
 br
