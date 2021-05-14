@@ -77,7 +77,6 @@ GEM
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 2.13)
-    concurrent-ruby (1.0.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     daemons (1.2.4)
@@ -96,7 +95,7 @@ GEM
     erubi (1.6.1)
     erubis (2.7.0)
     escape_utils (1.0.1)
-    eventmachine (1.2.5)
+    eventmachine (1.2.7)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -109,7 +108,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.1)
       faraday (>= 0.7.4, < 1.0)
-    faye-websocket (0.10.7)
+    faye-websocket (0.10.9)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     ffi (1.9.18)
@@ -234,9 +233,9 @@ GEM
       mongo (~> 2.1)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
-    multi_json (1.12.1)
+    multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.0.0)
+    multipart-post (2.1.1)
     nenv (0.3.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
@@ -390,7 +389,7 @@ GEM
     simplecov-html (0.10.2)
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
-    slack-api (1.6.0)
+    slack-api (1.6.1)
       faraday (~> 0.11)
       faraday_middleware (~> 0.10.0)
       faye-websocket (~> 0.10.6)
@@ -453,9 +452,9 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket-driver (0.6.5)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
+    websocket-extensions (0.1.5)
     yard (0.9.9)
 
 PLATFORMS
@@ -493,7 +492,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.4.10p364
 
 BUNDLED WITH
-   1.15.4
+   1.17.3
