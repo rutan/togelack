@@ -1,58 +1,74 @@
 {
-    "name": "Togelack",
-    "description": "Summary of Slack talks.",
-    "repository": "https://github.com/rutan/togelack",
-    "keywords": ["slack", "summary"],
-    "addons": ["mongolab:sandbox"],
-    "env": {
-        "RAILS_ENV": "production",
-        "MONGOID_ENV": "production",
-        "SECRET_KEY_BASE": {
-            "description": "secret-key for generate session",
-            "generator": "secret"
-        },
-        "SLACK_TOKEN": {
-            "description": "your Slack API Token (see. https://api.slack.com/web#authentication)",
-            "value": ""
-        },
-        "SLACK_CLIENT_ID": {
-            "description": "your Slack Application Key (see. https://api.slack.com/applications)",
-            "value": ""
-        },
-        "SLACK_CLIENT_SECRET": {
-            "description": "your Slack Application Secret",
-            "value": ""
-        },
-        "SLACK_TEAM_ID": {
-            "description": "your Slack Team ID (ex. T12345) (see. https://api.slack.com/methods/team.info/test)",
-            "value": ""
-        },
-        "SLACK_TEAM_NAME": {
-            "description": "your Slack Team Name (<this is name>.slack.com)",
-            "value": ""
-        },
-        "SLACK_CHANNEL": {
-            "description": "notify channel name (ex. general)",
-            "value": "",
-            "required": false
-        },
-        "SLACK_ICON": {
-            "description": "notify icon (ex. :smile: / http://〜)",
-            "value": "https://raw.githubusercontent.com/rutan/togelack/master/togelack.png",
-            "required": false
-        },
-        "REDIS_URL": {
-            "description": "Redis URL(if you want to use for cache)",
-            "value": "",
-            "required": false
-        },
-        "PRIVATE_MODE": {
-            "description": "Require login to view contents(set 'true' to enabled)",
-            "value": "",
-            "required": false
-        }
+  "name": "Togelack",
+  "description": "Summary of Slack talks.",
+  "repository": "https://github.com/rutan/togelack",
+  "keywords": [
+    "slack",
+    "summary"
+  ],
+  "addons": [
+    "mongolab:sandbox"
+  ],
+  "env": {
+    "RAILS_ENV": "production",
+    "MONGOID_ENV": "production",
+    "SECRET_KEY_BASE": {
+      "description": "secret-key for generate session",
+      "generator": "secret"
     },
-    "scripts": {
-        "postdeploy": "bundle exec rake db:mongoid:create_indexes"
+    "SLACK_TOKEN": {
+      "description": "your Slack API Token (see. https://api.slack.com/web#authentication)",
+      "value": ""
+    },
+    "SLACK_CLIENT_ID": {
+      "description": "your Slack Application Key (see. https://api.slack.com/applications)",
+      "value": ""
+    },
+    "SLACK_CLIENT_SECRET": {
+      "description": "your Slack Application Secret",
+      "value": ""
+    },
+    "SLACK_TEAM_ID": {
+      "description": "your Slack Team ID (ex. T12345) (see. https://api.slack.com/methods/team.info/test)",
+      "value": ""
+    },
+    "SLACK_TEAM_NAME": {
+      "description": "your Slack Team Name (<this is name>.slack.com)",
+      "value": ""
+    },
+    "SLACK_CHANNEL": {
+      "description": "notify channel name (ex. general)",
+      "value": "",
+      "required": false
+    },
+    "SLACK_ICON": {
+      "description": "notify icon (ex. :smile: / http://〜)",
+      "value": "https://raw.githubusercontent.com/rutan/togelack/master/togelack.png",
+      "required": false
+    },
+    "REDIS_URL": {
+      "description": "Redis URL(if you want to use for cache)",
+      "value": "",
+      "required": false
+    },
+    "PRIVATE_MODE": {
+      "description": "Require login to view contents(set 'true' to enabled)",
+      "value": "",
+      "required": false
     }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:mongoid:create_indexes",
+    "dokku": {
+      "predeploy": "bundle exec rake db:migrate"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby.git"
+    }
+  ]
 }

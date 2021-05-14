@@ -287,6 +287,8 @@ GEM
       tilt (~> 1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
+    simpacker (1.2.0)
+      railties (>= 4.2)
     slack-ruby-client (0.14.6)
       activesupport
       faraday (>= 0.9)
@@ -374,6 +376,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (= 5.0.1)
+  simpacker
   slack-ruby-client
   slack_markdown
   slim-rails

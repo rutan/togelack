@@ -39,7 +39,7 @@
             input.uk-width-1-1 type='text' name='permalink' placeholder='https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/.../....' v-model='permalink' v-attr='readonly: nowLoading'
           .uk-width-1-5
             button.uk-button.uk-width-1-1 type='submit' v-attr='disabled: nowLoading'
-              i.fa.fa-eyedropper v-if='!nowLoading'
+              i.fa.fa-eye-dropper v-if='!nowLoading'
               i.fa.fa-spinner.fa-spin v-if='nowLoading'
 
         p.uk-text-large.uk-text-muted style="{{loadMessages.length > 0 ? 'display: none;' : ''}}"

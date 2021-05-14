@@ -20,6 +20,8 @@ gem 'sprockets-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'uglifier', '>= 1.3.0'
 
+gem 'simpacker'
+
 gem 'gemoji'
 gem 'jquery-rails'
 
