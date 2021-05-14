@@ -21,18 +21,17 @@ class SummariesController < ApplicationController
 
   def create
     @summary = Summary.new(summary_params)
-    if @summary.save
-      if ENV['SLACK_CHANNEL'].present?
-        EM.defer do
-          client = SlackSupport::Client.create
-          poster = SlackSupport::Poster.new(client, ENV['SLACK_CHANNEL'])
-          poster.post(@current_user, summary_url(@summary), @summary.title, @summary.description)
-        end
+    raise 'error' unless @summary.save
+
+    if ENV['SLACK_CHANNEL'].present?
+      EM.defer do
+        client = SlackSupport::Client.create
+        poster = SlackSupport::Poster.new(client, ENV['SLACK_CHANNEL'])
+        poster.post(@current_user, summary_url(@summary), @summary.title, @summary.description)
       end
-      render json: {result: @summary.decorate}, root: nil
-    else
-      raise 'error'
     end
+
+    render json: { result: @summary.decorate }, root: nil
   end
 
   def show
@@ -43,15 +42,14 @@ class SummariesController < ApplicationController
 
   def update
     raise 'permission error' unless @summary.user == @current_user
-    if @summary.update(summary_params)
-      render json: {result: @summary.decorate}, root: nil
-    else
-      raise 'error'
-    end
+    raise 'error' unless @summary.update(summary_params)
+
+    render json: { result: @summary.decorate }, root: nil
   end
 
   def destroy
     raise 'permission error' unless @summary.user == @current_user || @current_user.admin?
+
     @summary.destroy
     redirect_to '/'
   end
@@ -63,9 +61,12 @@ class SummariesController < ApplicationController
   end
 
   def summary_params
-    n = params.permit(:title, :description, :messages => [])
+    Rails.logger.info '---------'
+    Rails.logger.info params.inspect
+    Rails.logger.info '---------'
+    n = params.permit(:title, :description, messages: [])
     n[:user] = @current_user
-    n[:messages] = n[:messages].uniq.reject(&:empty?).map { |n| Message.find(n) }
+    n[:messages] = n[:messages].uniq.reject(&:empty?).map { |id| Message.find(id) }
     n
   end
 end

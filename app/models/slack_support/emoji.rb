@@ -17,9 +17,7 @@ module SlackSupport
 
         resp['emoji'].tap do |list|
           list.map do |key, value|
-            if value =~ /\Aalias:(.+)\z/
-              list[key] = list[$1]
-            end
+            list[key] = list[Regexp.last_match(1)] if value =~ /\Aalias:(.+)\z/
           end
         end
       end

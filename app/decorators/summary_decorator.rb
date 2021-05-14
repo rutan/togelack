@@ -1,11 +1,14 @@
 class SummaryDecorator < Draper::Decorator
   delegate_all
   include DecorateSerializer
+
   attr :id, :title, :description, :path
 
+  # rubocop:disable Lint/DuplicateMethods
   def id
     object._id.to_s
   end
+  # rubocop:enable Lint/DuplicateMethods
 
   def path
     h.summary_path(self)
@@ -13,12 +16,10 @@ class SummaryDecorator < Draper::Decorator
 
   def description_html
     return '' unless object.description
+
     safe_html = h.html_escape(object.description.to_s)
-    safe_html.gsub!(/https?:\/\/[^\s]+/) do |match|
-      "<a href=\"https://slack-redir.net/link?url=#{h.html_escape match.to_s}\">#{match}</a>"
-    end
     h.simple_format(safe_html)
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error "#{e.inspect} - #{e.backtrace}"
     object.description.to_s
   end

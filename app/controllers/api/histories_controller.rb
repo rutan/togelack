@@ -11,7 +11,7 @@ module API
       chs = Services::CacheHistoryService.new(client)
       messages = chs.cache(params[:url])
 
-      render json: {result: MessageDecorator.decorate_collection(messages)}, root: nil
+      render json: { result: MessageDecorator.decorate_collection(messages) }, root: nil
     end
   end
 end

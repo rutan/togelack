@@ -19,18 +19,18 @@ class Summary
   after_initialize :set_default_params
 
   def sorted_messages
-    ms = self.messages.to_a
-    self.message_ids.map do |id|
+    ms = messages.to_a
+    message_ids.map do |id|
       ms.select { |n| n.id == id }.first
     end
   end
 
-  def self.match_text (text)
-    message_ids = Message.any_of({ :text => /.*#{text}.*/ }).only(:_id).map do |v|
-      {message_ids: v}
+  def self.match_text(text)
+    message_ids = Message.any_of({ text: /.*#{text}.*/ }).only(:_id).map do |v|
+      { message_ids: v }
     end
 
-    any_of({ :title => /.*#{text}.*/ }, message_ids)
+    any_of({ title: /.*#{text}.*/ }, message_ids)
   end
 
   private

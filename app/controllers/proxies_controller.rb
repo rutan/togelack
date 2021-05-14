@@ -5,24 +5,10 @@ class ProxiesController < ApplicationController
   def show
     raise 'invalid' unless params[:url]
 
-    data = Rails.cache.fetch("proxies#show__#{Digest::MD5.hexdigest params[:url]}", expires_in: 1.hours) do
-      url = URI.parse(params[:url])
-      resp = Net::HTTP.get_response(url)
-      if resp.code =~ /\A2\d+\z/ && resp.size < IMAGE_MAX_SIZE && IMAGE_CONTENT_TYPE.include?(resp.content_type)
-        {
-            content_type: resp.content_type,
-            body: resp.body,
-        }
-      else
-        nil
-      end
-    end
+    data = fetch(params[:url])
+    raise '404' unless data
 
-    if data
-      send_data data[:body], type: data[:content_type], disposition: 'inline'
-    else
-      raise '404'
-    end
+    send_data data[:body], type: data[:content_type], disposition: 'inline'
   end
 
   IMAGE_MAX_SIZE = 1024
@@ -32,5 +18,20 @@ class ProxiesController < ApplicationController
     image/jpeg
     image/x-png
     image/png
-  ]
+  ].freeze
+
+  private
+
+  def fetch(url)
+    Rails.cache.fetch("proxies#show__#{Digest::MD5.hexdigest(url)}", expires_in: 1.hours) do
+      url = URI.parse(url)
+      resp = Net::HTTP.get_response(url)
+      if resp.code =~ /\A2\d+\z/ && resp.size < IMAGE_MAX_SIZE && IMAGE_CONTENT_TYPE.include?(resp.content_type)
+        {
+          content_type: resp.content_type,
+          body: resp.body
+        }
+      end
+    end
+  end
 end

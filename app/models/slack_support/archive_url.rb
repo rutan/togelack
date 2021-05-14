@@ -8,21 +8,19 @@ module SlackSupport
       extract_from_url
     end
 
-    attr_accessor :url
-    attr_accessor :team
-    attr_accessor :channel
-    attr_accessor :ts
+    attr_accessor :url, :team, :channel, :ts
 
     private
 
     def extract_from_url
       result = url.match URL_REGEX
       return nil unless result
+
       self.team = result['team']
       self.channel = result['channel']
       self.ts = "#{result['ts1']}.#{result['ts2']}"
     end
 
-    URL_REGEX = Regexp.new("\\Ahttps://(?<team>[^\\.]+)\\.slack\\.com/archives/(?<channel>[^/]+)/p(?<ts1>\\d+)(?<ts2>\\d{6})\\z")
+    URL_REGEX = Regexp.new('\\Ahttps://(?<team>[^\\.]+)\\.slack\\.com/archives/(?<channel>[^/]+)/p(?<ts1>\\d+)(?<ts2>\\d{6})\\z')
   end
 end

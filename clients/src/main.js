@@ -123,6 +123,10 @@ class EditApp extends Vue {
                         return
                     }
                     this.nowSubmitting = true
+
+                    console.log({messageIDs});
+
+
                     $.ajax({
                         type: (this.summaryID ? 'put' : 'post'),
                         url: (this.summaryID ? `/summaries/${this.summaryID}.json` : '/summaries.json'),

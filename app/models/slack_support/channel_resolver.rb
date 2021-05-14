@@ -8,7 +8,7 @@ module SlackSupport
     def resolve_by_id(id)
       @cache[id] ||=
         begin
-          response = @client.conversations_info({channel: id})
+          response = @client.conversations_info({ channel: id })
           response['ok'] ? response['channel']['name'] : id
         end
     end

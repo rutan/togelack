@@ -12,14 +12,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login_in_private
-    redirect_to '/auth/slack' if ENV['PRIVATE_MODE'] == 'true' && ! @current_user
+    redirect_to '/auth/slack' if ENV['PRIVATE_MODE'] == 'true' && !@current_user
   end
 
   def do_login
-    if session['user_id']
-      @current_user = User.where(uid: session['user_id']).first
-      session['user_id'] = nil unless @current_user
-    end
+    return unless session['user_id']
+
+    @current_user = User.where(uid: session['user_id']).first
+    session['user_id'] = nil unless @current_user
   end
 
   def do_check_login
