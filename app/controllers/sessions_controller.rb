@@ -4,10 +4,10 @@ class SessionsController < ApplicationController
   # GET /auth/slack/callback
   def create
     auth = request.env['omniauth.auth']
-
-    redirect_to '/' unless auth
-    redirect_to '/' unless auth['provider'] == 'slack'
-    redirect_to '/' unless auth['info']['team_id'] == ENV['SLACK_TEAM_ID']
+    unless auth && auth['provider'] == 'slack' && auth['info']['team_id'] == ENV['SLACK_TEAM_ID']
+      redirect_to '/'
+      return
+    end
 
     user = User.find_or_initialize_by(uid: auth['uid'])
     user.name = auth['info']['nickname']

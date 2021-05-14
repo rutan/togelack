@@ -1,5 +1,3 @@
-require 'slack'
-
 class SummariesController < ApplicationController
   before_action :do_check_login, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_summary, only: [:show, :edit, :update, :destroy]
@@ -24,9 +22,10 @@ class SummariesController < ApplicationController
   def create
     @summary = Summary.new(summary_params)
     if @summary.save
-      if ENV['SLACK_CHANNEL']
+      if ENV['SLACK_CHANNEL'].present?
         EM.defer do
-          poster = SlackSupport::Poster.new(Slack::Client.new(token: ENV['SLACK_TOKEN']), ENV['SLACK_CHANNEL'])
+          client = SlackSupport::Client.create
+          poster = SlackSupport::Poster.new(client, ENV['SLACK_CHANNEL'])
           poster.post(@current_user, summary_url(@summary), @summary.title, @summary.description)
         end
       end

@@ -68,7 +68,7 @@ class MessageDecorator < Draper::Decorator
   def self.processor
     @prosessor ||= SlackMarkdown::Processor.new(
         asset_root: '/assets',
-        cushion_link: 'https://slack-redir.net/link?url='
+        cushion_link: ENV['CUSHION_LINK']
     )
   end
 
@@ -89,15 +89,12 @@ class MessageDecorator < Draper::Decorator
         },
         on_slack_channel_id: -> (uid) {
           Rails.cache.fetch("channel_data_#{uid}", expires_in: 1.hours) do
-            case uid[0]
-            when 'C'
-              name = self.slack_client.channels_info(channel: uid)['channel']['name']
-              {text: name, url: "https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/#{name}"}
-            when 'G'
-              name = self.slack_client.groups_info(channel: uid)['group']['name']
-              {text: name, url: "https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/#{name}"}
+            resp = self.slack_client.conversations_info(channel: uid)
+            if resp['ok']
+              name = resp['channel']['name']
+              {text: name, url: "https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/#{uid}"}
             else
-              {text: uid, url: nil}
+              {text: uid, url: '#'}
             end
           end
         }

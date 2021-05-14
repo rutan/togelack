@@ -28,17 +28,7 @@ module Services
           inclusive: false,
           count: 30,
       }
-      raw_messages =
-          case c_id.first
-          when 'C'
-            @client.channels_history(params)['messages'] || []
-          when 'G'
-            @client.groups_history(params)['messages'] || []
-          when 'D'
-            @client.im_history(params)['messages'] || []
-          else
-            []
-          end
+      raw_messages = @client.conversations_history(params)['messages'] || []
       raw_messages.map { |raw|
         # user
         if raw['user'] && !@cache_users.has_key?(raw['user'])

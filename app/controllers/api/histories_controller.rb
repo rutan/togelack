@@ -7,7 +7,7 @@ module API
     # 暫定
     # GET /api/histories.json?url=http://〜
     def index
-      client = Slack::Client.new(token: session[:token])
+      client = SlackSupport::Client.create(session[:token])
       chs = Services::CacheHistoryService.new(client)
       messages = chs.cache(params[:url])
 

@@ -12,7 +12,10 @@ module SlackSupport
 
     def list
       @list ||= Rails.cache.fetch('slack_support__emoji#list', expires_in: 30.minutes) do
-        @client.emoji_list['emoji'].tap do |list|
+        resp = @client.emoji_list
+        return {} unless resp['ok']
+
+        resp['emoji'].tap do |list|
           list.map do |key, value|
             if value =~ /\Aalias:(.+)\z/
               list[key] = list[$1]

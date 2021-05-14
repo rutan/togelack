@@ -23,7 +23,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'gemoji'
 
-gem 'slack-api'
+gem 'slack-ruby-client'
 gem 'slack_markdown'
 
 gem 'dotenv-rails'
@@ -31,18 +31,26 @@ gem 'dotenv-rails'
 gem 'omniauth'
 gem 'omniauth-slack'
 
-gem 'ikazuchi'
+gem 'kaminari'
 
 group :production do
   gem 'sprockets-redirect'
   gem 'rails_12factor'
 end
 
-group :development, :test do
+group :development do
   gem 'thin'
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'rubocop'
 end
 
 group :test do
   gem 'faker'
   gem 'webmock'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
 end
