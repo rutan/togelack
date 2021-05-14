@@ -1,13 +1,5 @@
-.slack-message-attachment class="slack-message-attachment-#{attachment_item[:service_name] || 'other'}"
+.slack-message-attachment class="slack-message-attachment-#{attachment_item[:service_name] || 'other'}" style='#{attachment_item[:color] ? "border-left-color: ##{attachment_item[:color]}" : ''};'
   - case attachment_item[:service_name]
-  - when nil
-    .slack-message-attachment-name
-      a href=attachment_item[:title_link]
-        = attachment_item[:title]
-    .slack-message-attachment-text
-      = attachment_text_format(attachment_item[:text])
-  - when 'togelack-image'
-    img src=image_proxy_path(url: attachment_item[:image_url]) alt=''
   - when 'twitter'
     .slack-message-attachment-name
       = attachment_item[:author_name]
@@ -17,5 +9,13 @@
     .slack-message-attachment-text
       = attachment_text_format(attachment_item[:text])
   - else
-    .slack-message-attachment-text
-      = attachment_item[:text]
+    - if attachment_item[:title]
+      .slack-message-attachment-name
+        a href=attachment_item[:title_link]
+          = attachment_item[:title]
+    - if attachment_item[:text]
+      .slack-message-attachment-text
+        = attachment_text_format(attachment_item[:text])
+    - if attachment_item[:image_url]
+      .slack-message-attachment-text
+        img src=image_proxy_path(url: attachment_item[:image_url]) alt='' width=(attachment_item[:image_width] || '100%') height=(attachment_item[:image_height] || '100%')

@@ -2,7 +2,7 @@ class MessageDecorator < Draper::Decorator
   delegate_all
   include DecorateSerializer
   attr :id, :username, :channel, :channel_name, :text, :format_text, :avatar_url, :me?, :created_at, :created_time,
-       :permalink
+       :permalink, :attachment_items
 
   # rubocop:disable Lint/DuplicateMethods
   def id
@@ -49,7 +49,7 @@ class MessageDecorator < Draper::Decorator
     case attachment['service_name']
     when 'twitter'
       attachment
-    when nil # 指定なし(通常テキスト)
+    else # 未知のサービスすべて（URL展開など）
       if attachment[:title] || attachment[:text]
         attachment
       elsif attachment[:image_url]

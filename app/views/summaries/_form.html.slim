@@ -22,6 +22,9 @@
               .slack-message-body
                 | {{{format_text}}}
 
+              .slack-message-attachment v-repeat='attachment_items'
+                | {{{fallback}}}
+
               ul.uk-subnav.uk-text-right.uk-margin-top
                 li
                   a v-on='click: dropMessage(messages, $droptag, {index: $index, type: "message"})'
@@ -58,6 +61,8 @@
                 | in \#{{channel_name}}
             .slack-message-body
               | {{{format_text}}}
+            .slack-message-attachment v-repeat='attachment_items'
+              | {{{fallback}}}
 
             ul.uk-subnav.uk-text-right.uk-margin-top
               li
