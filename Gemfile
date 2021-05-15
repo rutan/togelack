@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.9'
 
 gem 'bootsnap'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1.0'
 gem 'rails-i18n'
 
 gem 'eventmachine'
