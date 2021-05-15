@@ -8,8 +8,8 @@ html
         | &nbsp;-&nbsp;Togelack
       - else
         | Togelack
-    = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
+    = stylesheet_pack_tag 'application'
   body
     nav.uk-navbar
       .uk-container.uk-container-center
@@ -40,6 +40,5 @@ html
       .global-alert
         = @global_alert
 
-    = javascript_include_tag 'application'
     = javascript_pack_tag 'application'
     = yield(:javascript)

@@ -3308,35 +3308,6 @@ select.uk-form-width-mini {
   /* 2 */
   position: relative;
 }
-/* ========================================================================
-   Component: Icon
- ========================================================================== */
-@font-face {
-  font-family: 'FontAwesome';
-  src: url("/fonts/fontawesome-webfont.eot");
-  src: url("/fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/fontawesome-webfont.woff") format("woff"), url("/fonts/fontawesome-webfont.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-/*
- * 1. Allow margin
- * 2. Prevent inherit font style
- * 4. Correct line-height
- * 5. Better font rendering
- */
-[class*='uk-icon-'] {
-  font-family: FontAwesome;
-  /* 1 */
-  display: inline-block;
-  /* 2 */
-  font-weight: normal;
-  font-style: normal;
-  /* 4 */
-  line-height: 1;
-  /* 5 */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 /* Size modifiers
  ========================================================================== */
 .uk-icon-small:before {

@@ -1,6 +1,7 @@
 const path = require('path');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { NODE_ENV } = process.env;
 const isProd = NODE_ENV === 'production';
@@ -9,7 +10,11 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : 'source-map',
   entry: {
-    application: path.resolve(__dirname, 'front', 'index.js')
+    application: [
+      '@fortawesome/fontawesome-free/js/all.js',
+      path.resolve(__dirname, 'front', 'index.scss'),
+      path.resolve(__dirname, 'front', 'index.ts')
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'public', 'packs'),
@@ -27,7 +32,15 @@ module.exports = {
         include: path.resolve(__dirname, 'front')
       },
       {
-        test: /\.(svg|png|gif)$/,
+        test: /\.(s?css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.(svg|png|gif|eot|ttf|woff2?)$/,
         use: [
           {
             loader: 'file-loader',
@@ -35,12 +48,12 @@ module.exports = {
               name: '[name]-[hash].[ext]'
             }
           }
-        ],
-        include: path.join(__dirname, 'front')
+        ]
       }
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new WebpackAssetsManifest({
       publicPath: true,
       output: 'manifest.json',

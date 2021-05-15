@@ -3,7 +3,7 @@
 const Vue = require('vue');
 Vue.use(require('vue-dnd'));
 
-class EditApp extends Vue {
+export class EditApp extends Vue {
   constructor(element) {
     const properties = {
       el: element,
@@ -124,9 +124,6 @@ class EditApp extends Vue {
           }
           this.nowSubmitting = true;
 
-          console.log({ messageIDs });
-
-
           $.ajax({
             type: (this.summaryID ? 'put' : 'post'),
             url: (this.summaryID ? `/summaries/${this.summaryID}.json` : '/summaries.json'),
@@ -151,8 +148,6 @@ class EditApp extends Vue {
   }
 }
 
-const createEditApp = (element) => {
+export const createEditApp = (element) => {
   return new EditApp(element);
 };
-
-window.createEditApp = createEditApp;

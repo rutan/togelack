@@ -1,29 +1,23 @@
 source 'https://rubygems.org'
 ruby '2.5.9'
 
+gem 'rails', '~> 4.2'
+gem 'rails-i18n'
+
 gem 'eventmachine'
 gem 'puma'
-gem 'rails', '~> 4.2'
-gem 'rails-i18n', '~> 4.0.0'
 
 gem 'bson_ext'
 gem 'kaminari-mongoid'
 gem 'mongoid', '~> 5.0.0'
 gem 'redis-rails'
 
-gem 'compass-rails', '~> 2.0.4'
 gem 'draper'
-gem 'font-awesome-sass'
-gem 'sass-rails', '5.0.1'
 gem 'slim-rails'
-gem 'sprockets-rails'
-gem 'therubyracer', platforms: :ruby
-gem 'uglifier', '>= 1.3.0'
 
 gem 'simpacker'
 
 gem 'gemoji'
-gem 'jquery-rails'
 
 gem 'slack_markdown'
 gem 'slack-ruby-client'
