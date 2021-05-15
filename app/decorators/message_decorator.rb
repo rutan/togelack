@@ -2,7 +2,7 @@ class MessageDecorator < Draper::Decorator
   delegate_all
   include DecorateSerializer
   attr :id, :username, :channel, :channel_name, :text, :format_text, :avatar_url, :me?, :created_at, :created_time,
-       :permalink, :attachment_items
+       :permalink, :attachment_items, :is_bot
 
   # rubocop:disable Lint/DuplicateMethods
   def id
@@ -18,17 +18,23 @@ class MessageDecorator < Draper::Decorator
     I18n.l(object.created_at)
   end
 
+  # rubocop:disable Naming/PredicateName
+  def is_bot
+    return true unless object.owner
+
+    !!object.owner.try(:is_bot)
+  end
+  # rubocop:enable Naming/PredicateName
+
   def avatar_url
-    if object['icons']
-      if object['icons']['emoji']
-        name = object['icons']['emoji'].gsub(':', '')
-        self.class.emoji[name]
-      else
-        object['icons'].values.first
-      end
-    else
-      object.owner.try(:avatar_url)
-    end
+    icons = object['icons']
+
+    return object.owner.try(:avatar_url) unless icons
+    return icons.values.first unless icons['emoji']
+    return icons['image_64'] if icons['image_64']
+
+    name = icons['emoji'].gsub(':', '')
+    self.class.emoji[name]
   end
 
   def permalink

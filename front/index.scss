@@ -231,10 +231,11 @@ a.uk-navbar-brand {
 
   .slack-message-header {
     overflow: hidden;
+    display: flex;
+    align-items: center;
 
     & > * {
       display: block;
-      float: left;
       margin-right: .75em;
     }
 
@@ -242,6 +243,16 @@ a.uk-navbar-brand {
       font-size: 14px;
       font-weight: bold;
       color: $text-color;
+    }
+
+    .slack-message-header-app {
+      font-size: 10px;
+      height: 16px;
+      line-height: 16px;
+      background: #eee;
+      color: #999;
+      padding: 0 4px;
+      margin-left: -.5em;
     }
 
     .slack-message-header-channel,

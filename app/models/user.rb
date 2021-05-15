@@ -5,6 +5,7 @@ class User
   field :display_name, type: String
   field :avatar_url, type: String
   field :is_admin, type: Boolean
+  field :is_bot, type: Boolean
   field :last_fetched_at, type: DateTime
   has_many :summaries
   index({ uid: 1 }, {})
@@ -52,7 +53,9 @@ class User
       display_name: raw['profile']['display_name'],
       avatar_url: raw['profile']['image_192'],
       is_admin: raw['is_admin'],
+      is_bot: (raw['is_bot'] || raw['is_app_user']),
       last_fetched_at: Time.zone.now
     )
+    self
   end
 end

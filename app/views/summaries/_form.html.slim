@@ -14,6 +14,8 @@
               .slack-message-header
                 .slack-message-header-name
                   | {{username}}
+                .slack-message-header-app v-if="is_bot"
+                  | APP
                 a.slack-message-header-date target='_blank' rel='noopener noreferrer' v-attr='href: permalink'
                   | {{created_time}}
                 .slack-message-header-channel
@@ -55,6 +57,8 @@
             .slack-message-header
               .slack-message-header-name
                 | {{username}}
+              .slack-message-header-app v-if="is_bot"
+                | APP
               a.slack-message-header-date target='_blank' rel='noopener noreferrer' v-attr='href: permalink'
                 | {{created_time}}
               .slack-message-header-channel
