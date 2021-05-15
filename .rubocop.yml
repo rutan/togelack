@@ -9,7 +9,7 @@ AllCops:
     - vendor/**/*
     - spec/spec_helper.rb
     - spec/rails_helper.rb
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   DisplayCopNames: true
   NewCops: enable
 
