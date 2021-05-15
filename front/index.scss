@@ -1,9 +1,16 @@
 @import './vendor/uikit.ruikit.scss';
 @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
 
+$theme-color: #3286ef;
+$panel-bg-color: #fff;
+$panel-shadow-color: rgba(0, 0, 0, .2);
+$text-color: #222;
+$link-color: #0076c1;
+
 body {
-  background: #01579B;
+  background: #fafafa;
   padding-bottom: 20px;
+  line-height: 1.7;
 }
 
 input::selection,
@@ -13,40 +20,45 @@ textarea::selection {
 
 a, .uk-link {
   &:link, &:visited {
-    color: #64B5F6;
+    color: $link-color;
+    text-decoration: none;
   }
 
   &:hover {
-    color: #BBDEFB;
+    text-decoration: underline;
   }
 }
 
 a.uk-navbar-brand {
   color: #fff;
+  line-height: 40px;
+  font-weight: bold;
 }
 
 .uk-navbar {
-  background: #0288D1;
+  background: $theme-color;
   color: #fff;
 
   .uk-navbar-nav > li > a {
-    background: #0288D1;
+    background: $theme-color;
 
     &:hover {
-      background: #0277BD;
+      opacity: .6;
     }
   }
 }
 
 .uk-panel-box {
-  background: rgba(0, 0, 0, .25);
-  color: #fff;
+  background: $panel-bg-color;
+  color: $text-color;
+  box-shadow: 0 0 2px $panel-shadow-color;
 
   .uk-panel-title {
-    color: #fff;
+    color: $theme-color;
+    font-weight: bold;
 
     a {
-      color: #fff;
+      color: $theme-color;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -68,32 +80,26 @@ a.uk-navbar-brand {
   }
 }
 
-.uk-pagination > li > a {
-  background: #0277BD;
-  color: #fff;
-}
+.uk-nav {
+  & > li {
+    border-top: 1px dotted #ddd;
 
-.uk-pagination > .uk-active > span {
-  background: #03A9F4;
-  color: #fff;
-}
+    &:first-child {
+      border-top: 0;
+    }
 
-.uk-pagination > .uk-disabled > span {
-  background: #01579B;
-  color: #fff;
-}
-
-.uk-nav > li > a {
-  color: #fff;
-  &:hover {
-    color: #B3E5FC;
+    a {
+      padding: 5px;
+    }
   }
 }
 
+.uk-nav > li > a,
 .uk-subnav > li > a {
-  color: #fff;
+  color: $text-color;
+
   &:hover {
-    color: #B3E5FC;
+    opacity: .6;
   }
 }
 
@@ -165,10 +171,12 @@ a.uk-navbar-brand {
 
 .summary-list-item-title {
   font-size: 20px;
+  font-weight: bold;
   margin-top: 0;
   margin-bottom: 0;
+
   a {
-    color: #fff;
+    color: $theme-color;
   }
 }
 
@@ -190,13 +198,12 @@ a.uk-navbar-brand {
 .summary-list-item-split {
   margin-top: 10px;
   margin-bottom: 10px;
-  border-color: rgba(255, 255, 255, .3);
+  border-color: rgba(0, 0, 0, .1);
 }
-
 
 .slack-message {
   margin-top: 15px;
-  font-size: 14px;
+  font-size: 15px;
 
   &:first-child {
     margin-top: 0;
@@ -234,7 +241,7 @@ a.uk-navbar-brand {
     .slack-message-header-name {
       font-size: 14px;
       font-weight: bold;
-      color: #4FC3F7;
+      color: $text-color;
     }
 
     .slack-message-header-channel,
@@ -247,15 +254,15 @@ a.uk-navbar-brand {
 
   .slack-message-body {
     margin-top: 5px;
-    line-height: 1.4;
+    line-height: 1.5;
     word-wrap: break-word;
 
     a {
-      color: #fff;
-      text-decoration: underline;
+      color: $link-color;
+      text-decoration: none;
 
       &:hover {
-        text-decoration: none;
+        text-decoration: underline;
       }
     }
 
@@ -264,12 +271,21 @@ a.uk-navbar-brand {
     }
 
     pre {
-      background: rgba(0, 0, 0, .3);
-      color: #fff;
+      background: #f9f9f9;
+
+      code {
+        background: transparent;
+        border: 0;
+        padding: 0;
+        color: $text-color;
+      }
     }
 
     code {
-      color: #FFF176;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      color: #ff0e58;
+      padding: 4px;
       white-space: pre;
     }
 
@@ -292,14 +308,13 @@ a.uk-navbar-brand {
     }
 
     &.me {
-      opacity: .5;
+      opacity: .7;
     }
   }
 
   .slack-message-attachment {
     margin-top: 5px;
-    padding: 10px;
-    background: rgba(0, 0, 0, .3);
+    padding: 5px 10px;
     border-left: 6px solid #ccc;
     line-height: 1.5;
   }
