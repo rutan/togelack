@@ -7,6 +7,24 @@ Slack Summary Service (like togetter).
 ## How to deploy
 - [SlackのTogetter風アプリ「Togelack」をHerokuにデプロイする - Qiita](http://qiita.com/ru_shalm/items/35100b527877cfe09b5e)
 
+## How to run (development mode)
+
+### Requirement
+- Ruby
+- node.js
+
+### run rails server
+```bash
+$ bundle install
+$ bundle rails s
+```
+
+### run webpack dev server
+```bash
+$ yarn install
+$ yarn start
+```
+
 ## env
 ### requirement
 - RAILS_ENV
