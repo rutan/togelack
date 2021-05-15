@@ -7,12 +7,16 @@ module Services
 
     def cache(url)
       archive_url = SlackSupport::ArchiveURL.new(url)
+      raise 'invalid url' unless archive_url.valid?
+
       c_id, = detect_channel_id_and_name(archive_url)
       raise 'not found channels' unless c_id
 
-      fetch_messages(archive_url).map do |raw|
-        convert_and_store_message(raw, archive_url)
-      end.reverse
+      if archive_url.thread_ts
+        fetch_replies(archive_url)
+      else
+        fetch_histories(archive_url).reverse
+      end
     end
 
     private
@@ -22,28 +26,35 @@ module Services
     end
 
     def detect_channel_id_and_name(archive_url)
-      if archive_url.channel.match(/[A-Z]/)
-        [
-          archive_url.channel,
-          resolver.resolve_by_id(archive_url.channel)
-        ]
-      else
-        [
-          resolver.resolve_by_name(archive_url.channel),
-          archive_url.channel
-        ]
-      end
+      [
+        archive_url.channel,
+        resolver.resolve_by_id(archive_url.channel)
+      ]
     end
 
-    def fetch_messages(archive_url)
+    def fetch_histories(archive_url)
       c_id, = detect_channel_id_and_name(archive_url)
       params = {
         channel: c_id,
         oldest: archive_url.ts,
         inclusive: false,
-        count: 30
+        limit: 30
       }
-      @client.conversations_history(params)['messages'] || []
+      resp = @client.conversations_history(params)['messages']
+      resp ? resp.map { |n| convert_and_store_message(n, archive_url) } : []
+    end
+
+    def fetch_replies(archive_url)
+      c_id, = detect_channel_id_and_name(archive_url)
+      params = {
+        channel: c_id,
+        ts: archive_url.thread_ts,
+        oldest: archive_url.ts,
+        inclusive: false,
+        limit: 30
+      }
+      resp = @client.conversations_replies(params)['messages']
+      resp ? resp.map { |n| convert_and_store_message(n, archive_url) } : []
     end
 
     def convert_and_store_message(raw, archive_url)
