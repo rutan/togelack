@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.9'
+ruby '3.0.1'
 
 gem 'bootsnap'
 gem 'rails', '~> 6.1.0'
@@ -10,7 +10,6 @@ gem 'puma'
 
 gem 'bson'
 gem 'mongoid', '~> 7.0'
-gem 'redis-rails'
 
 gem 'draper'
 gem 'slim-rails'
@@ -40,16 +39,5 @@ group :development, :test do
 end
 
 group :development do
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'pry-doc'
-  gem 'pry-rails'
   gem 'rubocop'
-end
-
-group :test do
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'rspec-rails'
-  gem 'webmock'
 end
