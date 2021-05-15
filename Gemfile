@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 ruby '2.5.9'
 
-gem 'rails', '~> 5.1.0'
+gem 'bootsnap'
+gem 'rails', '~> 5.2.0'
 gem 'rails-i18n'
 
 gem 'eventmachine'
 gem 'puma'
 
 gem 'bson'
-gem 'mongoid', '~> 6.0.0'
+gem 'mongoid', '~> 6.0'
 gem 'redis-rails'
 
 gem 'draper'
@@ -32,6 +33,10 @@ gem 'kaminari-mongoid'
 group :production do
   gem 'rails_12factor'
   gem 'sprockets-redirect'
+end
+
+group :development, :test do
+  gem 'listen'
 end
 
 group :development do
