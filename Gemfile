@@ -17,9 +17,9 @@ gem 'slim-rails'
 
 gem 'simpacker'
 
-gem 'gemoji'
+gem 'gemoji', '~> 3.0.1'
 
-gem 'slack_markdown'
+gem 'slack_markdown', '~> 0.3'
 gem 'slack-ruby-client'
 
 gem 'dotenv-rails'

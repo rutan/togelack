@@ -29,7 +29,7 @@
           .slack-message-header-name
             | #{message.username}
           a.slack-message-header-date href=message.permalink target='_blank'
-            = l(message.created_at)
+            = I18n.l(message.created_at)
           .slack-message-header-channel
             | in ##{message.channel_name}
         .slack-message-body class=('me' if message.me?)

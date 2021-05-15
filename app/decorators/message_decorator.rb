@@ -36,7 +36,7 @@ class MessageDecorator < Draper::Decorator
   end
 
   def format_text
-    self.class.processor.call(object.text, self.class.context)[:output].to_s.html_safe
+    @format_text ||= self.class.processor.call(object.text, self.class.context)[:output].to_s.html_safe
   end
 
   def attachment_items
@@ -65,10 +65,16 @@ class MessageDecorator < Draper::Decorator
 
   class << self
     def processor
-      @processor ||= SlackMarkdown::Processor.new(
-        asset_root: '/assets',
-        cushion_link: ENV['CUSHION_LINK']
-      )
+      @processor ||=
+        begin
+          processor = SlackMarkdown::Processor.new(
+            asset_root: '/assets',
+            cushion_link: ENV['CUSHION_LINK']
+          )
+          processor.filters.push(::PipelineFilters::ReplaceEmojiFilter)
+
+          processor
+        end
     end
 
     def context
