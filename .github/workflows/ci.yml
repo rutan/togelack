@@ -1,0 +1,22 @@
+name: ci
+on:
+  - push
+  - pull_request
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.0
+      env:
+        MONGO_HOST: 'mongo:27017'
+    services:
+      mongo:
+        image: mongo
+    env:
+      TZ: 'Asia/Tokyo'
+    steps:
+      - uses: actions/checkout@v2
+      - name: bundler
+        run: bundle install -j4
+      - name: rubocop
+        run: bundle exec rubocop

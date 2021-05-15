@@ -60,7 +60,7 @@ class MessageDecorator < Draper::Decorator
     {
       fallback: file['name'],
       title: file['title'],
-      title_link: file['thumb_360'] || file['url_private'],
+      title_link: file['thumb_360'] || file['url_private']
     }
   end
 
