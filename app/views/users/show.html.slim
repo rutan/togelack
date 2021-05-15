@@ -13,4 +13,4 @@
       = render '/summaries/sidebar'
 
 - content_for :title do
-  == "#{@user.name} さんのまとめ"
+  == "#{@user.name_or_display_name} さんのまとめ"

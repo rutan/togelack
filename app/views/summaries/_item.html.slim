@@ -10,7 +10,7 @@
       - if summary.user
         | by&nbsp;
         a href=user_path(summary.user)
-          | #{summary.user.name}
+          | #{summary.user.name_or_display_name}
       - else
         | -
 

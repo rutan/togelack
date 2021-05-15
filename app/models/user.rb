@@ -2,12 +2,17 @@ class User
   include Mongoid::Document
   field :uid, type: String
   field :name, type: String
+  field :display_name, type: String
   field :avatar_url, type: String
   field :is_admin, type: Boolean
   field :last_fetched_at, type: DateTime
   has_many :summaries
   index({ uid: 1 }, {})
   index({ name: 1 }, {})
+
+  def name_or_display_name
+    display_name.present? ? display_name : name
+  end
 
   def self.find_or_fetch(client, uid)
     user = where(uid: uid).first
@@ -23,25 +28,14 @@ class User
     raw = client.users_info(user: uid)['user']
     return nil unless raw
 
-    User.create(
-      uid: raw['id'],
-      name: raw['name'],
-      avatar_url: raw['profile']['image_192'],
-      is_admin: raw['is_admin'],
-      last_fetched_at: Time.now
-    )
+    User.find_or_create_by(uid: raw['id']).update_by_raw(raw)
   end
 
   def fetch(client)
     raw = client.users_info(user: uid)['user']
     return unless raw
 
-    update(
-      name: raw['name'],
-      avatar_url: raw['profile']['image_192'],
-      is_admin: raw['is_admin'],
-      last_fetched_at: Time.now
-    )
+    update_by_raw(raw)
   end
 
   def admin?
@@ -50,5 +44,17 @@ class User
 
   def to_param
     name
+  end
+
+  private
+
+  def update_by_raw(raw)
+    update(
+      name: raw['name'],
+      display_name: raw['profile']['display_name'],
+      avatar_url: raw['profile']['image_192'],
+      is_admin: raw['is_admin'],
+      last_fetched_at: Time.zone.now
+    )
   end
 end

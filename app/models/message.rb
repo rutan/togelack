@@ -10,7 +10,7 @@ class Message
   def username
     case self['username']
     when nil
-      owner.try(:name)
+      owner.try(:name_or_display_name)
     when /<@[^|]+|([^>]+)>/
       self['username'].match(/\|([^>]+)/)[1].to_s
     else

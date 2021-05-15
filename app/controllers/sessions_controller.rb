@@ -34,9 +34,8 @@ class SessionsController < ApplicationController
   end
 
   def create_or_update_user(auth)
-    user = User.find_or_initialize_by(uid: auth['uid'])
-    user.name = auth['info']['nickname']
-    user.avatar_url = auth['info']['image']
+    client = ::SlackSupport::Client.create
+    user = ::User.fetch(client, auth['uid'])
     user.is_admin = auth.extra.user_info['user']['is_admin']
     user.save!
 
