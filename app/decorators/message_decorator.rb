@@ -72,6 +72,7 @@ class MessageDecorator < Draper::Decorator
             cushion_link: ENV['CUSHION_LINK']
           )
           processor.filters.push(::PipelineFilters::ReplaceEmojiFilter)
+          processor.filters.push(::PipelineFilters::AddRelToLinkFilter)
 
           processor
         end

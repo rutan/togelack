@@ -23,12 +23,12 @@
   ul.uk-list
     - summary.messages.each do |message|
       li.slack-message
-        a.slack-message-avatar href=message.permalink target='_blank'
+        a.slack-message-avatar href=message.permalink target='_blank' rel='noopener noreferrer'
           img src=message.avatar_url
         .slack-message-header
           .slack-message-header-name
             | #{message.username}
-          a.slack-message-header-date href=message.permalink target='_blank'
+          a.slack-message-header-date href=message.permalink target='_blank' rel='noopener noreferrer'
             = I18n.l(message.created_at)
           .slack-message-header-channel
             | in ##{message.channel_name}

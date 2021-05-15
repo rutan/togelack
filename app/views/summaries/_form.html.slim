@@ -14,7 +14,7 @@
               .slack-message-header
                 .slack-message-header-name
                   | {{username}}
-                a.slack-message-header-date target='_blank' v-attr='href: permalink'
+                a.slack-message-header-date target='_blank' rel='noopener noreferrer' v-attr='href: permalink'
                   | {{created_time}}
                 .slack-message-header-channel
                   | in \#{{channel_name}}
@@ -55,7 +55,7 @@
             .slack-message-header
               .slack-message-header-name
                 | {{username}}
-              a.slack-message-header-date target='_blank' v-attr='href: permalink'
+              a.slack-message-header-date target='_blank' rel='noopener noreferrer' v-attr='href: permalink'
                 | {{created_time}}
               .slack-message-header-channel
                 | in \#{{channel_name}}
