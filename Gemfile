@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 ruby '2.5.9'
 
 gem 'bootsnap'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 6.0.0'
 gem 'rails-i18n'
 
 gem 'eventmachine'
 gem 'puma'
 
 gem 'bson'
-gem 'mongoid', '~> 6.0'
+gem 'mongoid', '~> 7.0'
 gem 'redis-rails'
 
 gem 'draper'
@@ -45,7 +45,6 @@ group :development do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'rubocop'
-  gem 'thin'
 end
 
 group :test do
