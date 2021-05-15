@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.10'
+ruby '2.5.9'
 
 gem 'eventmachine'
 gem 'puma'
