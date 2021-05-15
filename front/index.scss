@@ -316,6 +316,10 @@ a.uk-navbar-brand {
     padding: 5px 10px;
     border-left: 6px solid #ccc;
     line-height: 1.5;
+
+    &-name {
+      font-weight: bold;
+    }
   }
 }
 

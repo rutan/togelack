@@ -5,6 +5,7 @@ module PipelineFilters
         next unless node['href'].starts_with?('http')
         next if node['rel']
 
+        node['target'] = '_blank'
         node['rel'] = 'noopener noreferrer'
       end
 

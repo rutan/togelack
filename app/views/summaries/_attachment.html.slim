@@ -11,7 +11,10 @@
   - else
     - if attachment_item[:title]
       .slack-message-attachment-name
-        a href=attachment_item[:title_link]
+        - if attachment_item[:title_link]
+          a href=attachment_item[:title_link] target='_blank' rel='noopener noreferrer'
+            = attachment_item[:title]
+        - else
           = attachment_item[:title]
     - if attachment_item[:text]
       .slack-message-attachment-text

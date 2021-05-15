@@ -46,8 +46,6 @@ class User
     name
   end
 
-  private
-
   def update_by_raw(raw)
     update(
       name: raw['name'],

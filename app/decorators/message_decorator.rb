@@ -40,9 +40,28 @@ class MessageDecorator < Draper::Decorator
   end
 
   def attachment_items
-    (object['attachments'] || []).map do |attachment|
-      convert_attachment(attachment)
-    end.compact
+    @attachment_items ||=
+      begin
+        items = []
+
+        items += (object['files'] || []).map do |file|
+          convert_file(file)
+        end
+
+        items += (object['attachments'] || []).map do |attachment|
+          convert_attachment(attachment)
+        end
+
+        items.compact
+      end
+  end
+
+  def convert_file(file)
+    {
+      fallback: file['name'],
+      title: file['title'],
+      title_link: file['thumb_360'] || file['url_private'],
+    }
   end
 
   def convert_attachment(attachment)

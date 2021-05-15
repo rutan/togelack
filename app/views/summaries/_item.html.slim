@@ -36,7 +36,7 @@
           == message.format_text
         - if message.image
           .slack-message-attachment class="slack-message-attachment-image"
-            a href=message.permalink
+            a href=message.permalink target='_blank' rel='noopener noreferrer'
               img src=message.image['thumb_360'] alt=message.image['title']
         - message.attachment_items.each do |attachment_item|
           = render('/summaries/attachment', attachment_item: attachment_item)
