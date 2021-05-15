@@ -31,7 +31,6 @@ gem 'kaminari-mongoid'
 
 group :production do
   gem 'rails_12factor'
-  gem 'sprockets-redirect'
 end
 
 group :development, :test do
