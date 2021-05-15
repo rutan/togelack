@@ -96,6 +96,8 @@ Metrics/AbcSize:
 # incompatible DSL
 Metrics/BlockLength:
   Enabled: false
+Metrics/ClassLength:
+  Enabled: false
 
 # my preference :)
 Metrics/LineLength:
