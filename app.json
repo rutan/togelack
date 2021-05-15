@@ -60,7 +60,7 @@
   "scripts": {
     "postdeploy": "bundle exec rake db:mongoid:create_indexes",
     "dokku": {
-      "predeploy": "bundle exec rake db:migrate"
+      "postdeploy": "bundle exec rake db:mongoid:create_indexes"
     }
   },
   "buildpacks": [
