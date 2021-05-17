@@ -37,6 +37,12 @@
             | in ##{message.channel_name}
         .slack-message-body class=('me' if message.me?)
           == message.format_text
+        - if message.image
+          .slack-message-attachment class="slack-message-attachment-image"
+            a href=message.permalink target='_blank' rel='noopener noreferrer'
+              img src=message.image['thumb_360'] alt=message.image['title']
+        - message.attachment_items.each do |attachment_item|
+          = render('/summaries/attachment', attachment_item: attachment_item)
         - if message.reactions.size > 0
           .slack-message-reactions
             - message.reactions.each do |reaction|
@@ -48,12 +54,6 @@
                     = reaction[:emoji_raw]
                 .slack-message-reactions-item-count
                   = reaction[:count]
-        - if message.image
-          .slack-message-attachment class="slack-message-attachment-image"
-            a href=message.permalink target='_blank' rel='noopener noreferrer'
-              img src=message.image['thumb_360'] alt=message.image['title']
-        - message.attachment_items.each do |attachment_item|
-          = render('/summaries/attachment', attachment_item: attachment_item)
 
     - if @current_user && (@current_user == summary.user || @current_user.admin?)
       ul.uk-subnav.uk-text-right.uk-margin-top
