@@ -19,7 +19,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public', 'packs'),
     publicPath: isProd ? '/packs/' : '//localhost:8080/packs/',
-    filename: isProd ? '[name]-[hash].js' : '[name].js'
+    filename: isProd ? '[name]-[contenthash].js' : '[name].js'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js']
@@ -45,7 +45,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name]-[hash].[ext]'
+              name: isProd ? '[name]-[contenthash].[ext]' : '[name].[ext]',
             }
           }
         ]
@@ -53,7 +53,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: isProd ? '[name]-[contenthash].css' : '[name].css',
+    }),
     new WebpackAssetsManifest({
       publicPath: true,
       output: 'manifest.json',
