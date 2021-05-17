@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     @message = message
     respond_to do |format|
       format.html { render '/errors/common', status: @status }
-      format.json { render_json({}, status: @status, message: @message) }
+      format.json { render json: {}, status: @status, message: @message }
     end
   end
 

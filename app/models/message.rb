@@ -19,7 +19,9 @@ class Message
   end
 
   def owner
-    self['user'] ? User.find_by(uid: self['user']) : nil
+    return User.find_by(uid: self['user']) if self['user']
+
+    nil
   end
 
   def me?

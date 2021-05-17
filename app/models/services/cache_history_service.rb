@@ -3,6 +3,7 @@ module Services
     def initialize(client)
       @client = client
       @cache_users = {}
+      @cache_bots = {}
     end
 
     def cache(url)
@@ -60,10 +61,11 @@ module Services
     def convert_and_store_message(raw, archive_url)
       _, channel_name = detect_channel_id_and_name(archive_url)
 
+      # bot
+      raw['user'] = fetch_bot_user_id(raw['bot_id']) if !raw['user'] && raw['bot_id']
+
       # user
-      if raw['user'] && !@cache_users.key?(raw['user'])
-        @cache_users[raw['user']] = User.find_or_fetch(@client, raw['user'])
-      end
+      prefetch_user(raw['user']) if raw['user']
 
       # message
       message = Message.find_or_initialize_by(
@@ -75,6 +77,18 @@ module Services
       message.save
 
       message
+    end
+
+    def prefetch_user(user_id)
+      return if @cache_users.key?(user_id)
+
+      @cache_users[user_id] = User.find_or_fetch(@client, user_id)
+    end
+
+    def fetch_bot_user_id(bot_id)
+      @cache_bots[bot_id] = @client.bots_info(bot: bot_id) unless @cache_bots[bot_id]
+
+      @cache_bots[bot_id]['ok'] ? @cache_bots[bot_id]['bot']['user_id'] : nil
     end
   end
 end
