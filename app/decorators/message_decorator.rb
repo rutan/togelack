@@ -1,13 +1,16 @@
+require 'gemoji'
+
 class MessageDecorator < Draper::Decorator
   delegate_all
   include DecorateSerializer
   attr :id, :username, :channel, :channel_name, :text, :format_text, :avatar_url, :me?, :created_at, :created_time,
-       :permalink, :attachment_items, :is_bot
+       :permalink, :attachment_items, :is_bot, :reactions
 
   # rubocop:disable Lint/DuplicateMethods
   def id
     object._id.to_s
   end
+
   # rubocop:enable Lint/DuplicateMethods
 
   def channel_name
@@ -24,6 +27,7 @@ class MessageDecorator < Draper::Decorator
 
     !!object.owner.try(:is_bot)
   end
+
   # rubocop:enable Naming/PredicateName
 
   def avatar_url
@@ -74,7 +78,8 @@ class MessageDecorator < Draper::Decorator
     case attachment['service_name']
     when 'twitter'
       attachment
-    else # 未知のサービスすべて（URL展開など）
+    else
+      # 未知のサービスすべて（URL展開など）
       if attachment[:title] || attachment[:text]
         attachment
       elsif attachment[:image_url]
@@ -86,6 +91,20 @@ class MessageDecorator < Draper::Decorator
 
   def image
     object['file'] if object['file'] && object['file']['mimetype'].include?('image')
+  end
+
+  def reactions
+    return [] if object['reactions'].blank?
+
+    object['reactions'].map do |reaction|
+      name = reaction['name'].to_s
+      {
+        name: name,
+        count: reaction['count'].to_i,
+        emoji_url: self.class.emoji[name],
+        emoji_raw: Emoji.find_by_alias(name)&.raw
+      }.with_indifferent_access
+    end
   end
 
   class << self

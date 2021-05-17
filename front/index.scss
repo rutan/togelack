@@ -225,6 +225,7 @@ a.uk-navbar-brand {
 
   .slack-message-header,
   .slack-message-body,
+  .slack-message-reactions,
   .slack-message-attachment {
     margin-left: 46px;
   }
@@ -319,6 +320,38 @@ a.uk-navbar-brand {
 
     &.me {
       opacity: .7;
+    }
+  }
+
+  .slack-message-reactions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eee;
+      font-size: 11px;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 10px;
+      border-radius: 12px;
+      margin-right: 10px;
+
+      &-image {
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: no-repeat center center / contain;
+        font-size: 12px;
+        line-height: 16px;
+        margin-right: 5px;
+      }
+
+      &-count {
+      }
     }
   }
 

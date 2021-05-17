@@ -37,6 +37,17 @@
             | in ##{message.channel_name}
         .slack-message-body class=('me' if message.me?)
           == message.format_text
+        - if message.reactions.size > 0
+          .slack-message-reactions
+            - message.reactions.each do |reaction|
+              .slack-message-reactions-item title=reaction[:name]
+                - if reaction[:emoji_url]
+                  .slack-message-reactions-item-image style="background-image: url(#{reaction[:emoji_url]});"
+                - else
+                  .slack-message-reactions-item-image
+                    = reaction[:emoji_raw]
+                .slack-message-reactions-item-count
+                  = reaction[:count]
         - if message.image
           .slack-message-attachment class="slack-message-attachment-image"
             a href=message.permalink target='_blank' rel='noopener noreferrer'
