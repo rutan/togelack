@@ -25,4 +25,26 @@ class ApplicationController < ActionController::Base
   def do_check_login
     raise unless @current_user
   end
+
+  rescue_from Exception, with: :render_500 unless Rails.env.development?
+  rescue_from Mongoid::Errors::DocumentNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+
+  def render_error(status, message = '')
+    @status = status
+    @message = message
+    respond_to do |format|
+      format.html { render '/errors/common', status: @status }
+      format.json { render_json({}, status: @status, message: @message) }
+    end
+  end
+
+  def render_404
+    render_error(404, 'Not Found')
+  end
+
+  def render_500(e = nil)
+    Rails.logger.error "#{e.message}\n#{e.backtrace.join("\n")}" if e
+    render_error(500, 'Internal Server Error')
+  end
 end
