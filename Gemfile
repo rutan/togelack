@@ -10,6 +10,7 @@ gem 'puma'
 
 gem 'bson'
 gem 'mongoid', '~> 7.0'
+gem 'redis'
 
 gem 'draper'
 gem 'slim-rails'
