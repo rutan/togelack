@@ -64,10 +64,8 @@ module.exports = {
     new CaseSensitivePathsPlugin()
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
-    publicPath: '/packs/',
     port: 8080,
-    disableHostCheck: true,
+    allowedHosts: 'all',
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
