@@ -74,6 +74,10 @@ Style/MultilineBlockChain:
 Style/NumericPredicate:
   Enabled: false
 
+# using
+Style/OpenStructUse:
+  Enabled: false
+
 # useful :)
 Style/Semicolon:
   Exclude:
