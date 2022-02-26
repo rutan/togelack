@@ -6,7 +6,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.0
+      image: ruby:3.0.3
       env:
         MONGO_HOST: 'mongo:27017'
     services:
