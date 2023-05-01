@@ -7,12 +7,12 @@ class User
   field :is_admin, type: Boolean
   field :is_bot, type: Boolean
   field :last_fetched_at, type: DateTime
-  has_many :summaries
+  has_many :summaries, dependent: :restrict_with_exception
   index({ uid: 1 }, {})
   index({ name: 1 }, {})
 
   def name_or_display_name
-    display_name.present? ? display_name : name
+    (display_name.presence || name)
   end
 
   def self.find_or_fetch(client, uid)

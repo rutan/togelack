@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.0.3'
+ruby '3.2.2'
 
 gem 'bootsnap'
 gem 'rails', '~> 6.1.0'
@@ -40,4 +40,5 @@ end
 
 group :development do
   gem 'rubocop'
+  gem 'rubocop-rails'
 end

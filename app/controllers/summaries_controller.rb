@@ -15,8 +15,14 @@ class SummariesController < ApplicationController
     @summaries = SummaryDecorator.decorate_collection(source)
   end
 
+  def show
+  end
+
   def new
     @summary = SummaryDecorator.decorate(Summary.new)
+  end
+
+  def edit
   end
 
   def create
@@ -32,12 +38,6 @@ class SummariesController < ApplicationController
     end
 
     render json: { result: @summary.decorate }, root: nil
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update

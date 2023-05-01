@@ -42,7 +42,7 @@ class MessageDecorator < Draper::Decorator
   end
 
   def permalink
-    "https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/#{channel}/p#{object['ts'].to_s.gsub('.', '')}"
+    "https://#{ENV.fetch('SLACK_TEAM_NAME', nil)}.slack.com/archives/#{channel}/p#{object['ts'].to_s.gsub('.', '')}"
   end
 
   def format_text
@@ -113,7 +113,7 @@ class MessageDecorator < Draper::Decorator
         begin
           processor = SlackMarkdown::Processor.new(
             asset_root: '/assets',
-            cushion_link: ENV['CUSHION_LINK']
+            cushion_link: ENV.fetch('CUSHION_LINK', nil)
           )
           processor.filters.push(::PipelineFilters::ReplaceEmojiFilter)
           processor.filters.push(::PipelineFilters::AddRelToLinkFilter)
@@ -132,25 +132,25 @@ class MessageDecorator < Draper::Decorator
     end
 
     def on_slack_user_id(uid)
-      Rails.cache.fetch("user_data_#{uid}", expires_in: 1.hours) do
+      Rails.cache.fetch("user_data_#{uid}", expires_in: 1.hour) do
         user = User.find_or_fetch(slack_client, uid)
         user ? { text: user.name, url: "/@#{user.name}" } : nil
       end
     end
 
     def on_slack_user_name(name)
-      Rails.cache.fetch("user_data_#{name}", expires_in: 1.hours) do
+      Rails.cache.fetch("user_data_#{name}", expires_in: 1.hour) do
         user = User.where(name: name).first
         user ? { text: user.name, url: "/@#{user.name}" } : nil
       end
     end
 
     def on_slack_channel_id(uid)
-      Rails.cache.fetch("channel_data_#{uid}", expires_in: 1.hours) do
+      Rails.cache.fetch("channel_data_#{uid}", expires_in: 1.hour) do
         resp = slack_client.conversations_info(channel: uid)
         if resp['ok']
           name = resp['channel']['name']
-          { text: name, url: "https://#{ENV['SLACK_TEAM_NAME']}.slack.com/archives/#{uid}" }
+          { text: name, url: "https://#{ENV.fetch('SLACK_TEAM_NAME', nil)}.slack.com/archives/#{uid}" }
         else
           { text: uid, url: '#' }
         end

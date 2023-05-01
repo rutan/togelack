@@ -1,3 +1,6 @@
+require:
+  - rubocop-rails
+
 AllCops:
   Exclude:
     - config.ru
@@ -91,6 +94,10 @@ Style/SymbolArray:
 Layout/EmptyLinesAroundArguments:
   Enabled: false
 
+# my preference :)
+Layout/LineLength:
+  Max: 120
+
 # challenge!
 Metrics/AbcSize:
   Max: 20
@@ -102,10 +109,6 @@ Metrics/BlockLength:
   Enabled: false
 Metrics/ClassLength:
   Enabled: false
-
-# my preference :)
-Metrics/LineLength:
-  Max: 120
 
 # challenge!
 Metrics/MethodLength:
@@ -120,3 +123,14 @@ Naming/VariableNumber:
 
 Naming/MethodParameterName:
   Enabled: false
+
+# conflict gemoji gem :ex) Emoji.find_by_alias
+Rails/DynamicFindBy:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/OutputSafety:
+  Exclude:
+    - app/decorators/message_decorator.rb
