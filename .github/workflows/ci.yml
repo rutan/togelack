@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
     container:
       image: ruby:3.0.3
