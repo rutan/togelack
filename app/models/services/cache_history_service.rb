@@ -38,7 +38,7 @@ module Services
       params = {
         channel: c_id,
         oldest: archive_url.ts,
-        inclusive: false,
+        inclusive: true,
         limit: 30
       }
       resp = @client.conversations_history(params)['messages']

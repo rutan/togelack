@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider(:slack, ENV['SLACK_CLIENT_ID'], ENV['SLACK_CLIENT_SECRET'],
+  provider(:slack, ENV.fetch('SLACK_CLIENT_ID', nil), ENV.fetch('SLACK_CLIENT_SECRET', nil),
            scope: 'identify,read',
-           team: ENV['SLACK_TEAM_ID'])
+           team: ENV.fetch('SLACK_TEAM_ID', nil))
 end

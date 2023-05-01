@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find_by(name: params[:name])
   rescue StandardError => e
-    puts e.backtrace.inspect
+    Rails.logger.debug e.backtrace.inspect
     raise e
   end
 end

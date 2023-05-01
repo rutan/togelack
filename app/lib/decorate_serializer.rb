@@ -3,9 +3,9 @@ module DecorateSerializer
     base.extend ClassMethods
     base.class_eval do
       def serializable_hash(_options = nil)
-        self.class.attr_lists.map { |n|
-          [n, public_send(n)]
-        }.to_h
+        self.class.attr_lists.index_with { |n|
+          public_send(n)
+        }
       end
     end
   end

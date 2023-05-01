@@ -23,7 +23,7 @@ class ProxiesController < ApplicationController
   private
 
   def fetch(url)
-    Rails.cache.fetch("proxies#show__#{Digest::MD5.hexdigest(url)}", expires_in: 1.hours) do
+    Rails.cache.fetch("proxies#show__#{Digest::MD5.hexdigest(url)}", expires_in: 1.hour) do
       url = URI.parse(url)
       resp = Net::HTTP.get_response(url)
       if resp.code =~ /\A2\d+\z/ && resp.size < IMAGE_MAX_SIZE && IMAGE_CONTENT_TYPE.include?(resp.content_type)

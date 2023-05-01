@@ -3,20 +3,19 @@ on:
   - push
   - pull_request
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.3
-      env:
-        MONGO_HOST: 'mongo:27017'
     services:
       mongo:
         image: mongo
     env:
+      MONGO_HOST: 'mongo:27017'
       TZ: 'Asia/Tokyo'
     steps:
-      - uses: actions/checkout@v2
-      - name: bundler
-        run: bundle install -j4
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
       - name: rubocop
         run: bundle exec rubocop
