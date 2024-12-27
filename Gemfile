@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '3.2.2'
 
 gem 'bootsnap'
 gem 'rails', '~> 6.1.0'
@@ -29,6 +28,11 @@ gem 'omniauth-slack'
 
 gem 'kaminari'
 gem 'kaminari-mongoid'
+
+gem 'base64', '~> 0.2.0'
+gem 'bigdecimal', '~> 3.1'
+gem 'drb', '~> 2.2'
+gem 'mutex_m', '~> 0.3.0'
 
 group :production do
   gem 'rails_12factor'

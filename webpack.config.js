@@ -64,10 +64,22 @@ module.exports = {
     new CaseSensitivePathsPlugin()
   ],
   devServer: {
+    server: 'https',
     port: 8080,
     allowedHosts: 'all',
     headers: {
       'Access-Control-Allow-Origin': '*'
+    },
+    proxy: {
+      context: (pathname) => {
+        return !pathname.startsWith('/asset_pack/');
+      },
+      target: 'http://localhost:3000',
+      changeOrigin: true,
+      onProxyReq: (proxyReq, req) => {
+        proxyReq.setHeader('X-Forwarded-Proto', 'https');
+        proxyReq.setHeader('Host', req.headers.host);
+      }
     }
   }
 };
