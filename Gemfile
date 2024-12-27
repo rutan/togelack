@@ -33,6 +33,7 @@ gem 'base64', '~> 0.2.0'
 gem 'bigdecimal', '~> 3.1'
 gem 'drb', '~> 2.2'
 gem 'mutex_m', '~> 0.3.0'
+gem 'net-smtp', '~> 0.5.0'
 
 group :production do
   gem 'rails_12factor'
@@ -43,6 +44,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rubocop'
+  gem 'rubocop', '1.50.2'
   gem 'rubocop-rails'
 end
